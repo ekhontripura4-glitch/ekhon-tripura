@@ -15,16 +15,12 @@ body{font-family:"Hind Siliguri",sans-serif;background:var(--bg);color:var(--tex
 a{text-decoration:none;color:inherit;}
 button{cursor:pointer;font-family:inherit;}
 img{display:block;max-width:100%;}
-
-/* TOPBAR */
 .topbar{background:var(--black);border-bottom:2px solid var(--red);}
 .topbar-inner{max-width:1200px;margin:auto;padding:5px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;}
 .topbar-date{color:#aaa;font-size:12px;}
 .topbar-links{display:flex;gap:16px;}
-.topbar-links a{color:#bbb;font-size:12px;transition:color .2s;}
+.topbar-links a{color:#bbb;font-size:12px;}
 .topbar-links a:hover{color:var(--red);}
-
-/* HEADER */
 .site-header{background:var(--white);border-bottom:3px solid var(--red);box-shadow:0 2px 10px rgba(0,0,0,.07);}
 .header-inner{max-width:1200px;margin:auto;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
 .logo-wrap{display:flex;align-items:center;gap:11px;}
@@ -40,8 +36,6 @@ img{display:block;max-width:100%;}
 .socials a{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;transition:transform .2s;}
 .socials a:hover{transform:scale(1.1);}
 .s-fb{background:#1877f2;}.s-wa{background:#25d366;}.s-yt{background:#f00;}
-
-/* NAVBAR */
 .navbar{background:var(--red);box-shadow:0 2px 6px rgba(0,0,0,.15);position:sticky;top:0;z-index:1000;}
 .nav-wrap{max-width:1200px;margin:auto;padding:0 16px;display:flex;align-items:center;}
 .nav-links{display:flex;align-items:center;flex:1;overflow-x:auto;cursor:grab;}
@@ -60,8 +54,6 @@ img{display:block;max-width:100%;}
 .mob-nav{display:none;flex-direction:column;background:#a82a1e;position:absolute;top:100%;left:0;right:0;z-index:1001;max-height:0;overflow:hidden;transition:max-height .32s ease;box-shadow:0 10px 25px rgba(0,0,0,.5);}
 .mob-nav.open{max-height:520px;}
 .mob-nav a{color:#fff;padding:12px 20px;font-size:14px;font-weight:600;border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:9px;}
-
-/* TICKER */
 .ticker-bar{background:#1a1a1a;display:flex;align-items:center;overflow:hidden;border-bottom:1px solid #2a2a2a;}
 .ticker-label{background:var(--red);color:#fff;padding:7px 14px;font-size:11px;font-weight:700;letter-spacing:1px;white-space:nowrap;flex-shrink:0;}
 .ticker-scroll{flex:1;overflow:hidden;width:100%;}
@@ -69,26 +61,18 @@ img{display:block;max-width:100%;}
 .ticker-track:hover{animation-play-state:paused;}
 .ticker-track span{color:#ddd;font-size:13px;padding:7px 36px;border-right:1px solid #333;}
 @keyframes tickerMove{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
-
-/* LAYOUT */
 .container{max-width:1200px;margin:auto;padding:0 16px;}
 .page-grid{display:grid;grid-template-columns:1fr 296px;gap:20px;padding:20px 0 30px;}
-
-/* SECTIONS */
 .sec-head{display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--red);padding-bottom:8px;margin-bottom:16px;}
 .sec-head h2{font-family:"Noto Serif Bengali",serif;font-size:19px;font-weight:800;color:var(--black);display:flex;align-items:center;gap:8px;}
 .sec-head h2::before{content:"";width:4px;height:20px;background:var(--red);border-radius:2px;display:inline-block;}
 .see-all{font-size:12px;color:var(--red);font-weight:600;border:1.5px solid var(--red);padding:3px 10px;border-radius:3px;transition:all .2s;}
 .see-all:hover{background:var(--red);color:#fff;}
 .sec-wrap{margin-bottom:26px;}
-
-/* BADGE */
 .badge{display:inline-block;padding:2px 9px;border-radius:3px;font-size:10px;font-weight:800;letter-spacing:.4px;margin-bottom:5px;}
 .b-red{background:var(--red);color:#fff;}
 .b-break{background:var(--red);color:#fff;animation:blink 1.4s infinite;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
-
-/* HERO */
 .hero-grid{display:grid;grid-template-columns:1.55fr 1fr;grid-template-rows:1fr 1fr;gap:10px;margin-bottom:24px;}
 .hero-main{grid-row:1/3;border-radius:7px;overflow:hidden;position:relative;box-shadow:var(--shadow);cursor:pointer;}
 .hero-main .himg{height:370px;overflow:hidden;}
@@ -106,8 +90,6 @@ img{display:block;max-width:100%;}
 .hero-cap .meta{color:#ccc;font-size:12px;}
 .hs-cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.82));padding:20px 13px 12px;}
 .hs-cap h3{font-family:"Noto Serif Bengali",serif;font-size:14px;font-weight:700;color:#fff;line-height:1.4;}
-
-/* CARDS */
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
 .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
 .card{background:#fff;border-radius:7px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:box-shadow .22s,transform .22s;display:flex;flex-direction:column;}
@@ -121,19 +103,9 @@ img{display:block;max-width:100%;}
 .card-body p{font-size:12.5px;color:var(--muted);line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .cmeta{font-size:11px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;margin-top:auto;}
 .card-h{flex-direction:row;}
-.card-h .cimg{width:130px;min-width:130px;height:auto;}
+.card-h .cimg{width:130px;min-width:130px;height:auto;min-height:120px;}
 .card-h .cimg img{height:100%;min-height:120px;}
 .card-h .cimg .ph{height:100%;min-height:120px;}
-
-/* RASHI */
-.rashi-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;}
-.rashi-card{background:#fff;border-radius:8px;padding:13px 6px;text-align:center;box-shadow:var(--shadow);cursor:pointer;transition:transform .2s;border-top:3px solid transparent;}
-.rashi-card:hover{transform:translateY(-2px);border-top-color:var(--red);}
-.rashi-card .ri{font-size:24px;margin-bottom:4px;}
-.rashi-card .rn{font-family:"Noto Serif Bengali",serif;font-size:12.5px;font-weight:700;}
-.rashi-card .rd{font-size:9.5px;color:var(--muted);margin-top:2px;}
-
-/* SIDEBAR */
 .sidebar{display:flex;flex-direction:column;gap:18px;}
 .widget{background:#fff;border-radius:7px;overflow:hidden;box-shadow:var(--shadow);}
 .whead{background:var(--red);color:#fff;padding:9px 15px;font-family:"Noto Serif Bengali",serif;font-size:14px;font-weight:700;}
@@ -167,8 +139,6 @@ img{display:block;max-width:100%;}
 .follow-links{display:flex;flex-direction:column;gap:9px;}
 .follow-links a{display:flex;align-items:center;gap:9px;padding:9px 14px;border-radius:6px;font-size:13px;font-weight:600;color:#fff;}
 .fl-fb{background:#1877f2;}.fl-wa{background:#25d366;}.fl-em{background:#ea4335;}
-
-/* FOOTER */
 .site-footer{background:#111;color:#bbb;margin-top:16px;}
 .footer-grid{max-width:1200px;margin:auto;padding:32px 16px;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:28px;}
 .fa-name{font-family:"Noto Serif Bengali",serif;font-size:21px;font-weight:900;color:#fff;margin-bottom:10px;}
@@ -183,8 +153,6 @@ img{display:block;max-width:100%;}
 .footer-col ul li a:hover{color:var(--red);}
 .footer-bottom{background:#0a0a0a;text-align:center;padding:13px 16px;font-size:12px;color:#555;border-top:1px solid #222;}
 .footer-bottom span{color:#e74c3c;}
-
-/* MODAL */
 #newsModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.82);z-index:9999;overflow-y:auto;-webkit-overflow-scrolling:touch;}
 .modal-box{background:#fff;border-radius:10px;max-width:760px;width:92%;margin:30px auto 60px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4);}
 .mcbtn{width:100%;background:var(--red);color:#fff;border:none;padding:13px;font-size:14px;font-weight:700;cursor:pointer;font-family:"Hind Siliguri",sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;}
@@ -195,15 +163,16 @@ img{display:block;max-width:100%;}
 .mtitle{font-family:"Noto Serif Bengali",serif;font-size:21px;font-weight:900;color:var(--black);line-height:1.45;margin-bottom:10px;}
 .mmeta{font-size:12px;color:var(--muted);margin-bottom:16px;display:flex;gap:14px;flex-wrap:wrap;}
 .mcontent{font-size:15px;line-height:1.9;color:#2a2a2a;white-space:pre-wrap;}
-
-/* RESPONSIVE */
+.share-wrap{padding:14px 22px;border-top:1px solid var(--border);background:#fafafa;}
+.share-wrap p{font-size:12px;color:var(--muted);margin-bottom:6px;}
+.share-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;color:#fff;cursor:pointer;border:none;margin-right:6px;font-family:"Hind Siliguri",sans-serif;}
+.share-fb{background:#1877f2;}.share-wa{background:#25d366;}.share-copy{background:#555;}
 @media(max-width:960px){
 .page-grid{grid-template-columns:1fr;}
 .hero-grid{grid-template-columns:1fr;}
 .hero-main{grid-row:auto;}
 .hero-main .himg{height:260px;}
 .grid-3{grid-template-columns:repeat(2,1fr);}
-.rashi-grid{grid-template-columns:repeat(4,1fr);}
 .footer-grid{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:640px){
@@ -217,28 +186,9 @@ img{display:block;max-width:100%;}
 .grid-2{grid-template-columns:1fr;}
 .card-h{flex-direction:column;}
 .card-h .cimg{width:100%;height:175px;}
-.rashi-grid{grid-template-columns:repeat(3,1fr);}
 .footer-grid{grid-template-columns:1fr;}
 .hero-cap h2{font-size:16px;}
 }
-
-/* ADVERTISEMENT */
-.ad-banner-top{width:100%;margin:12px 0;border-radius:8px;overflow:hidden;box-shadow:var(--shadow);}
-.ad-banner-top img{width:100%;height:auto;display:block;}
-.ad-banner-top .ad-placeholder{background:linear-gradient(135deg,#f39c12,#e67e22);padding:18px;text-align:center;color:#fff;border-radius:8px;font-size:13px;font-weight:600;}
-.ad-banner-top .ad-placeholder span{font-size:11px;opacity:.8;display:block;margin-top:4px;}
-.ad-between{margin:16px 0;border-radius:8px;overflow:hidden;box-shadow:var(--shadow);}
-.ad-between .ad-placeholder{background:linear-gradient(135deg,#2c3e50,#3498db);padding:16px;text-align:center;color:#fff;border-radius:8px;font-size:13px;font-weight:600;}
-
-/* SHARE BUTTONS */
-.share-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;color:#fff;cursor:pointer;border:none;transition:opacity .2s;margin-top:8px;margin-right:6px;font-family:"Hind Siliguri",sans-serif;}
-.share-btn:hover{opacity:.88;}
-.share-fb{background:#1877f2;}
-.share-wa{background:#25d366;}
-.share-tw{background:#1da1f2;}
-.share-copy{background:#555;}
-.share-wrap{padding:14px 22px;border-top:1px solid var(--border);background:#fafafa;}
-.share-wrap p{font-size:12px;color:var(--muted);margin-bottom:6px;}
 </style>
 </head>
 <body>
@@ -289,7 +239,6 @@ img{display:block;max-width:100%;}
       <a href="#">রাজনীতি</a>
       <a href="#">খেলাধুলা</a>
       <a href="#">বিনোদন</a>
-      <a href="#">রাশিফল</a>
       <a href="#">ই-পেপার</a>
     </div>
     <button class="nav-arr" id="navNext">&#8250;</button>
@@ -303,7 +252,6 @@ img{display:block;max-width:100%;}
     <a href="#">🏛️ রাজনীতি</a>
     <a href="#">🏏 খেলাধুলা</a>
     <a href="#">🎬 বিনোদন</a>
-    <a href="#">⭐ রাশিফল</a>
     <a href="#">📄 ই-পেপার</a>
   </div>
 </nav>
@@ -318,9 +266,9 @@ img{display:block;max-width:100%;}
   </div>
 </div>
 
-<!-- TOP ADVERTISEMENT BANNER -->
+<!-- TOP AD BANNER -->
 <div class="container">
-  <div id="topAdBanner" style="margin:12px 0;border-radius:8px;overflow:hidden;display:none;">
+  <div id="topAdBanner" style="margin:10px 0;border-radius:8px;overflow:hidden;display:none;">
     <a id="topAdLink" href="#" target="_blank" rel="noopener">
       <img id="topAdImg" src="" alt="বিজ্ঞাপন" style="width:100%;height:auto;display:block;">
     </a>
@@ -331,21 +279,48 @@ img{display:block;max-width:100%;}
   <div class="page-grid">
     <main>
       <div class="hero-grid" id="heroGrid">
-        <div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:#777;"><div style="font-size:30px;margin-bottom:10px;">⏳</div><div>নিউজ লোড হচ্ছে...</div></div>
+        <div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:#777;">
+          <div style="font-size:30px;margin-bottom:10px;">⏳</div>
+          <div>নিউজ লোড হচ্ছে...</div>
+        </div>
       </div>
-      <div class="sec-wrap" id="sec-tripura" style="display:none;"><div class="sec-head"><h2>ত্রিপুরা</h2><a href="#" class="see-all">সব দেখুন →</a></div><div class="grid-3" id="grid-tripura"></div></div>
-      <!-- MIDDLE ADVERTISEMENT BANNER -->
+
+      <div class="sec-wrap" id="sec-tripura" style="display:none;">
+        <div class="sec-head"><h2>ত্রিপুরা</h2><a href="#" class="see-all">সব দেখুন →</a></div>
+        <div class="grid-3" id="grid-tripura"></div>
+      </div>
+
+      <!-- MIDDLE AD BANNER -->
       <div id="midAdBanner" style="margin:16px 0;border-radius:8px;overflow:hidden;display:none;">
         <a id="midAdLink" href="#" target="_blank" rel="noopener">
           <img id="midAdImg" src="" alt="বিজ্ঞাপন" style="width:100%;height:auto;display:block;">
         </a>
       </div>
 
-      <div class="sec-wrap" id="sec-india" style="display:none;"><div class="sec-head"><h2>ভারত</h2><a href="#" class="see-all">সব দেখুন →</a></div><div class="grid-2" id="grid-india"></div></div>
-      <div class="sec-wrap" id="sec-politics" style="display:none;"><div class="sec-head"><h2>রাজনীতি</h2><a href="#" class="see-all">সব দেখুন →</a></div><div class="grid-3" id="grid-politics"></div></div>
-      <div class="sec-wrap" id="sec-sports" style="display:none;"><div class="sec-head"><h2>খেলাধুলা</h2><a href="#" class="see-all">সব দেখুন →</a></div><div class="grid-3" id="grid-sports"></div></div>
-      <div class="sec-wrap" id="sec-entertainment" style="display:none;"><div class="sec-head"><h2>বিনোদন</h2><a href="#" class="see-all">সব দেখুন →</a></div><div class="grid-3" id="grid-entertainment"></div></div>
-      <div class="sec-wrap" id="sec-international" style="display:none;"><div class="sec-head"><h2>আন্তর্জাতিক</h2><a href="#" class="see-all">সব দেখুন →</a></div><div class="grid-3" id="grid-international"></div></div>
+      <div class="sec-wrap" id="sec-india" style="display:none;">
+        <div class="sec-head"><h2>ভারত</h2><a href="#" class="see-all">সব দেখুন →</a></div>
+        <div class="grid-2" id="grid-india"></div>
+      </div>
+
+      <div class="sec-wrap" id="sec-politics" style="display:none;">
+        <div class="sec-head"><h2>রাজনীতি</h2><a href="#" class="see-all">সব দেখুন →</a></div>
+        <div class="grid-3" id="grid-politics"></div>
+      </div>
+
+      <div class="sec-wrap" id="sec-sports" style="display:none;">
+        <div class="sec-head"><h2>খেলাধুলা</h2><a href="#" class="see-all">সব দেখুন →</a></div>
+        <div class="grid-3" id="grid-sports"></div>
+      </div>
+
+      <div class="sec-wrap" id="sec-entertainment" style="display:none;">
+        <div class="sec-head"><h2>বিনোদন</h2><a href="#" class="see-all">সব দেখুন →</a></div>
+        <div class="grid-3" id="grid-entertainment"></div>
+      </div>
+
+      <div class="sec-wrap" id="sec-international" style="display:none;">
+        <div class="sec-head"><h2>আন্তর্জাতিক</h2><a href="#" class="see-all">সব দেখুন →</a></div>
+        <div class="grid-3" id="grid-international"></div>
+      </div>
     </main>
 
     <aside class="sidebar">
@@ -359,21 +334,27 @@ img{display:block;max-width:100%;}
           <div><span>🌡️ অনুভব</span><strong>31°</strong></div>
         </div>
       </div>
-      <div class="widget" id="trendingWidget" style="display:none;"><div class="whead">🔥 ট্রেন্ডিং</div><div class="wbody" id="trendingList"></div></div>
+      <div class="widget" id="trendingWidget" style="display:none;">
+        <div class="whead">🔥 ট্রেন্ডিং</div>
+        <div class="wbody" id="trendingList"></div>
+      </div>
       <div class="ad-box">
         <p>বিজ্ঞাপনের জন্য যোগাযোগ করুন</p>
         <h3>📢 আপনার বিজ্ঞাপন দিন</h3>
         <p>ত্রিপুরার সেরা বাংলা নিউজ পোর্টালে</p>
         <a href="https://wa.me/918787391790" target="_blank" rel="noopener">💬 WhatsApp করুন</a>
       </div>
-      <div class="widget" id="latestWidget" style="display:none;"><div class="whead">📰 সর্বশেষ খবর</div><div class="wbody" id="latestList"></div></div>
+      <div class="widget" id="latestWidget" style="display:none;">
+        <div class="whead">📰 সর্বশেষ খবর</div>
+        <div class="wbody" id="latestList"></div>
+      </div>
       <div class="widget">
         <div class="whead">📲 আমাদের অনুসরণ করুন</div>
         <div class="wbody">
           <div class="follow-links">
             <a href="https://facebook.com/share/1buQiZUsW5/" class="fl-fb" target="_blank" rel="noopener"><span style="font-weight:900;font-size:16px;">f</span> Facebook-এ Like করুন</a>
             <a href="https://wa.me/918787391790" class="fl-wa" target="_blank" rel="noopener">💬 WhatsApp-এ যোগ দিন</a>
-            <a href="/cdn-cgi/l/email-protection#dcb9b7b4b3b2a8aeb5aca9aebd9cbbb1bdb5b0f2bfb3b1" class="fl-em">✉️ <span class="__cf_email__" data-cfemail="1f7a747770716b6d766f6a6d7e5f78727e7673317c7072">[email&#160;protected]</span></a>
+            <a href="mailto:ekhontripura@gmail.com" class="fl-em">✉️ ekhontripura@gmail.com</a>
           </div>
         </div>
       </div>
@@ -385,21 +366,21 @@ img{display:block;max-width:100%;}
   <div class="footer-grid">
     <div class="footer-about">
       <div class="fa-name">এখন ত্রিপুরা</div>
-      <p>এখন ত্রিপুরা হলো ত্রিপুরার একটি নির্ভরযোগ্য ও সমসাময়িক বাংলা সংবাদমাধ্যম। সত্যনিষ্ঠতা, নিরপেক্ষতা ও পেশাদার সাংবাদিকতাই আমাদের মূল প্রতিশ্রুতি।</p>
+      <p>এখন ত্রিপুরা হলো ত্রিপুরার একটি নির্ভরযোগ্য ও সমসাময়িক বাংলা সংবাদমাধ্যম।</p>
       <div class="f-socials">
         <a href="https://facebook.com/share/1buQiZUsW5/" target="_blank" rel="noopener">f</a>
         <a href="https://wa.me/918787391790" target="_blank" rel="noopener">W</a>
-        <a href="/cdn-cgi/l/email-protection#cbaea0a3a4a5bfb9a2bbbeb9aa8baca6aaa2a7e5a8a4a6">@</a>
+        <a href="mailto:ekhontripura@gmail.com">@</a>
       </div>
     </div>
-    <div class="footer-col"><h4>বিভাগ</h4><ul><li><a href="#">ত্রিপুরা</a></li><li><a href="#">ভারত</a></li><li><a href="#">আন্তর্জাতিক</a></li><li><a href="#">রাজনীতি</a></li><li><a href="#">খেলাধুলা</a></li><li><a href="#">বিনোদন</a></li><li><a href="#">রাশিফল</a></li></ul></div>
-    <div class="footer-col"><h4>দ্রুত লিঙ্ক</h4><ul><li><a href="#">আমাদের সম্পর্কে</a></li><li><a href="#">যোগাযোগ</a></li><li><a href="#">বিজ্ঞাপন</a></li><li><a href="#">ই-পেপার</a></li><li><a href="#">গোপনীয়তা নীতি</a></li></ul></div>
-    <div class="footer-col"><h4>যোগাযোগ</h4><ul><li><a href="/cdn-cgi/l/email-protection#1e7b757671706a6c776e6b6c7f5e79737f7772307d7173">📧 <span class="__cf_email__" data-cfemail="6d0806050203191f041d181f0c2d0a000c0401430e0200">[email&#160;protected]</span></a></li><li><a href="https://wa.me/918787391790">📱 +91 87873 91790</a></li><li><a href="https://facebook.com/share/1buQiZUsW5/" target="_blank" rel="noopener">💻 Facebook Page</a></li></ul></div>
+    <div class="footer-col"><h4>বিভাগ</h4><ul><li><a href="#">ত্রিপুরা</a></li><li><a href="#">ভারত</a></li><li><a href="#">আন্তর্জাতিক</a></li><li><a href="#">রাজনীতি</a></li><li><a href="#">খেলাধুলা</a></li><li><a href="#">বিনোদন</a></li></ul></div>
+    <div class="footer-col"><h4>দ্রুত লিঙ্ক</h4><ul><li><a href="#">আমাদের সম্পর্কে</a></li><li><a href="#">যোগাযোগ</a></li><li><a href="#">বিজ্ঞাপন</a></li><li><a href="#">গোপনীয়তা নীতি</a></li></ul></div>
+    <div class="footer-col"><h4>যোগাযোগ</h4><ul><li><a href="mailto:ekhontripura@gmail.com">📧 ekhontripura@gmail.com</a></li><li><a href="https://wa.me/918787391790">📱 +91 87873 91790</a></li><li><a href="https://facebook.com/share/1buQiZUsW5/" target="_blank">💻 Facebook Page</a></li></ul></div>
   </div>
   <div class="footer-bottom">© ২০২৬ <span>এখন ত্রিপুরা ডিজিটাল মিডিয়া</span>। সর্বস্বত্ব সংরক্ষিত।</div>
 </footer>
 
-<!-- MODAL -->
+<!-- NEWS MODAL -->
 <div id="newsModal" onclick="if(event.target.id==='newsModal')NM.close();">
   <div class="modal-box">
     <button class="mcbtn" onclick="NM.close()">✕ বন্ধ করুন</button>
@@ -414,20 +395,19 @@ img{display:block;max-width:100%;}
       <p>📤 এই নিউজটি শেয়ার করুন:</p>
       <button class="share-btn share-fb" onclick="shareNews('facebook')">f Facebook</button>
       <button class="share-btn share-wa" onclick="shareNews('whatsapp')">💬 WhatsApp</button>
-      <button class="share-btn share-tw" onclick="shareNews('twitter')">𝕏 Twitter</button>
-      <button class="share-btn share-copy" onclick="shareNews('copy')">🔗 Link Copy</button>
+      <button class="share-btn share-copy" onclick="shareNews('copy')">🔗 Copy Link</button>
     </div>
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // Bengali date
 var D=["রবিবার","সোমবার","মঙ্গলবার","বুধবার","বৃহস্পতিবার","শুক্রবার","শনিবার"];
 var M=["জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"];
 function bn(n){return String(n).replace(/\d/g,function(d){return "০১২৩৪৫৬৭৮৯"[d];});}
 var now=new Date();
 var td=document.getElementById("topDate");
-if(td) td.textContent=D[now.getDay()]+", "+bn(now.getDate())+" "+M[now.getMonth()]+" "+bn(now.getFullYear());
+if(td)td.textContent=D[now.getDay()]+", "+bn(now.getDate())+" "+M[now.getMonth()]+" "+bn(now.getFullYear());
 
 // Hamburger
 var hb=document.getElementById("hamBtn"),mn=document.getElementById("mobNav");
@@ -437,16 +417,15 @@ if(hb&&mn){
   document.addEventListener("click",function(e){if(!hb.contains(e.target)&&!mn.contains(e.target)){hb.classList.remove("open");mn.classList.remove("open");}});
 }
 
-// Nav drag scroll
-var nl=document.getElementById("navLinks");
-var np=document.getElementById("navPrev"),nn=document.getElementById("navNext");
+// Nav drag
+var nl=document.getElementById("navLinks"),np=document.getElementById("navPrev"),nn=document.getElementById("navNext");
 if(nl){
   var drag=false,sx=0,sl=0;
   nl.addEventListener("mousedown",function(e){drag=true;sx=e.pageX-nl.offsetLeft;sl=nl.scrollLeft;nl.classList.add("grabbing");});
   document.addEventListener("mouseup",function(){drag=false;nl.classList.remove("grabbing");});
   document.addEventListener("mousemove",function(e){if(!drag)return;e.preventDefault();nl.scrollLeft=sl-(e.pageX-nl.offsetLeft-sx)*1.5;});
-  if(np) np.addEventListener("click",function(){nl.scrollBy({left:-160,behavior:"smooth"});});
-  if(nn) nn.addEventListener("click",function(){nl.scrollBy({left:160,behavior:"smooth"});});
+  if(np)np.addEventListener("click",function(){nl.scrollBy({left:-160,behavior:"smooth"});});
+  if(nn)nn.addEventListener("click",function(){nl.scrollBy({left:160,behavior:"smooth"});});
 }
 
 // Nav active
@@ -454,55 +433,34 @@ document.querySelectorAll(".nav-links a").forEach(function(a){
   a.addEventListener("click",function(e){e.preventDefault();document.querySelectorAll(".nav-links a").forEach(function(x){x.classList.remove("active");});this.classList.add("active");});
 });
 
-// Rashi
-document.querySelectorAll(".rashi-card").forEach(function(c){
-  c.addEventListener("click",function(){document.querySelectorAll(".rashi-card").forEach(function(x){x.style.borderTopColor="";});this.style.borderTopColor="#c0392b";});
-});
-
 // NEWS MODAL
-window.NM = {
-  _data: {},
-  open: function(key) {
-    var d = this._data[key];
-    if(!d) return;
-    var cn={tripura:"ত্রিপুরা",india:"ভারত",international:"আন্তর্জাতিক",politics:"রাজনীতি",sports:"খেলাধুলা",entertainment:"বিনোদন",rashi:"রাশিফল"};
-    document.getElementById("modalCat").textContent = cn[d.category]||d.category||"";
-    document.getElementById("modalTitle").textContent = d.title||"";
-    document.getElementById("modalContent").textContent = d.content||"";
-    document.getElementById("modalAuthor").textContent = d.author?"✍ "+d.author:"";
-    document.getElementById("modalDate").textContent = d.date?"📅 "+d.date:"";
+window.NM={
+  _d:{},
+  store:function(k,d){this._d[k]=d;},
+  open:function(k){
+    var d=this._d[k];if(!d)return;
+    var cn={tripura:"ত্রিপুরা",india:"ভারত",international:"আন্তর্জাতিক",politics:"রাজনীতি",sports:"খেলাধুলা",entertainment:"বিনোদন"};
+    document.getElementById("modalCat").textContent=cn[d.category]||d.category||"";
+    document.getElementById("modalTitle").textContent=d.title||"";
+    document.getElementById("modalContent").textContent=d.content||"";
+    document.getElementById("modalAuthor").textContent=d.author?"✍ "+d.author:"";
+    document.getElementById("modalDate").textContent=d.date?"📅 "+d.date:"";
     var img=document.getElementById("modalImg");
-    if(d.imageUrl){img.src=d.imageUrl;img.style.display="block";}
-    else{img.style.display="none";img.src="";}
+    if(d.imageUrl){img.src=d.imageUrl;img.style.display="block";}else{img.style.display="none";img.src="";}
     var m=document.getElementById("newsModal");
-    m.scrollTop=0;
-    m.style.display="block";
+    m.scrollTop=0;m.style.display="block";
   },
-  close: function() {
-    document.getElementById("newsModal").style.display="none";
-  },
-  store: function(key, data) {
-    this._data[key] = data;
-  }
+  close:function(){document.getElementById("newsModal").style.display="none";}
 };
 document.addEventListener("keydown",function(e){if(e.key==="Escape")NM.close();});
 
-// Share function
-window.shareNews = function(platform) {
-  var title = document.getElementById("modalTitle").textContent;
-  var url = window.location.href;
-  var text = title + " - এখন ত্রিপুরা";
-  if(platform === "facebook") {
-    window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url)+"&quote="+encodeURIComponent(text), "_blank");
-  } else if(platform === "whatsapp") {
-    window.open("https://wa.me/?text="+encodeURIComponent(text+" "+url), "_blank");
-  } else if(platform === "twitter") {
-    window.open("https://twitter.com/intent/tweet?text="+encodeURIComponent(text)+"&url="+encodeURIComponent(url), "_blank");
-  } else if(platform === "copy") {
-    navigator.clipboard.writeText(url).then(function(){
-      alert("Link copied!");
-    });
-  }
+// Share
+window.shareNews=function(p){
+  var t=document.getElementById("modalTitle").textContent;
+  var u=window.location.href;
+  if(p==="facebook")window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(u)+"&quote="+encodeURIComponent(t),"_blank");
+  else if(p==="whatsapp")window.open("https://wa.me/?text="+encodeURIComponent(t+" "+u),"_blank");
+  else if(p==="copy")navigator.clipboard.writeText(u).then(function(){alert("Link copied!");});
 };
 </script>
 
@@ -510,7 +468,7 @@ window.shareNews = function(platform) {
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, query, where, orderBy, limit, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-const app = initializeApp({
+const app=initializeApp({
   apiKey:"AIzaSyDilxe-j7wzHGOGhwro3ugOo94r_iIXvPI",
   authDomain:"ekhon-tripura-c809b.firebaseapp.com",
   projectId:"ekhon-tripura-c809b",
@@ -518,40 +476,43 @@ const app = initializeApp({
   messagingSenderId:"735998815074",
   appId:"1:735998815074:web:75c592d729e2bc30c05a3b"
 });
-const db = getFirestore(app);
-const CN = {tripura:"ত্রিপুরা",india:"ভারত",international:"আন্তর্জাতিক",politics:"রাজনীতি",sports:"খেলাধুলা",entertainment:"বিনোদন",rashi:"রাশিফল"};
-
+const db=getFirestore(app);
+const CN={tripura:"ত্রিপুরা",india:"ভারত",international:"আন্তর্জাতিক",politics:"রাজনীতি",sports:"খেলাধুলা",entertainment:"বিনোদন"};
 function fmt(ts){return ts?new Date(ts.seconds*1000).toLocaleDateString("bn-BD"):"";}
 
-function card(d, key, horiz) {
-  NM.store(key, {...d, date:fmt(d.createdAt)});
-  const cat = CN[d.category]||d.category||"";
-  const img = d.imageUrl?`<img src="${d.imageUrl}" style="width:100%;height:100%;object-fit:cover;" loading="lazy">`:`<div class="ph ph-1" style="height:100%;">📰</div>`;
-  if(horiz) return `<div class="card card-h" onclick="NM.open('${key}')"><div class="cimg" style="min-height:120px;">${img}</div><div class="card-body"><span class="badge b-red">${cat}</span><h3>${d.title}</h3><div class="cmeta"><span>📅 ${fmt(d.createdAt)}</span></div></div></div>`;
-  return `<div class="card" onclick="NM.open('${key}')"><div class="cimg">${img}</div><div class="card-body"><span class="badge b-red">${cat}</span><h3>${d.title}</h3><p>${d.excerpt||""}</p><div class="cmeta"><span>📅 ${fmt(d.createdAt)}</span>${d.author?`<span>✍ ${d.author}</span>`:""}</div></div></div>`;
+function card(d,key,horiz){
+  NM.store(key,{...d,date:fmt(d.createdAt)});
+  const cat=CN[d.category]||d.category||"";
+  const img=d.imageUrl?`<img src="${d.imageUrl}" style="width:100%;height:100%;object-fit:cover;" loading="lazy">`:`<div class="ph ph-1" style="height:100%;">📰</div>`;
+  if(horiz)return `<div class="card card-h" onclick="NM.open('${key}')"><div class="cimg" style="min-height:120px;">${img}</div><div class="card-body"><span class="badge b-red">${cat}</span><h3>${d.title}</h3><div class="cmeta"><span>📅 ${fmt(d.createdAt)}</span></div></div></div>`;
+  return `<div class="card" onclick="NM.open('${key}')"><div class="cimg" style="height:175px;">${img}</div><div class="card-body"><span class="badge b-red">${cat}</span><h3>${d.title}</h3><p>${d.excerpt||""}</p><div class="cmeta"><span>📅 ${fmt(d.createdAt)}</span>${d.author?`<span>✍ ${d.author}</span>`:""}</div></div></div>`;
 }
 
 (async()=>{
   try{
-    const snap = await getDocs(query(collection(db,"news"),where("status","==","published"),orderBy("createdAt","desc"),limit(30)));
-    if(snap.empty){document.getElementById("heroGrid").innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:#777;">এখনো কোনো নিউজ নেই।</div>';return;}
-    const docs=[];snap.forEach(d=>docs.push({id:d.id,...d.data()}));
+    const snap=await getDocs(query(collection(db,"news"),where("status","==","published"),orderBy("createdAt","desc"),limit(30)));
+    if(snap.empty){
+      document.getElementById("heroGrid").innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:#777;">এখনো কোনো নিউজ নেই।</div>';
+      return;
+    }
+    const docs=[];
+    snap.forEach(d=>docs.push({id:d.id,...d.data()}));
 
     // HERO
     const hg=document.getElementById("heroGrid");
-    let hh="";
     function hero(d,key,main){
       NM.store(key,{...d,date:fmt(d.createdAt)});
       const cat=CN[d.category]||d.category||"";
-      const bg=d.imageUrl?`style="background:url('${d.imageUrl}') center/cover no-repeat;"`:"`";
-      const pi=d.imageUrl?"":'<div class="himg"><div class="ph ph-1">📰</div></div>';
-      if(main) return `<div class="hero-main" ${bg} onclick="NM.open('${key}')">${pi}<div class="hero-cap">${d.breaking?'<span class="badge b-break">🔴 ব্রেকিং</span><br>':""}  <span class="badge b-red">${cat}</span><h2>${d.title}</h2><div class="meta">✍ ${d.author||"প্রতিবেদক"} | ${fmt(d.createdAt)}</div></div></div>`;
-      return `<div class="hero-side" ${bg} onclick="NM.open('${key}')">${pi}<div class="hs-cap"><span class="badge b-red">${cat}</span><h3>${d.title}</h3></div></div>`;
+      const bgStyle=d.imageUrl?`background:url('${d.imageUrl}') center/cover no-repeat;`:``;
+      const pi=d.imageUrl?"":`<div class="himg"><div class="ph ph-${main?1:2}">📰</div></div>`;
+      if(main)return `<div class="hero-main" style="${bgStyle}" onclick="NM.open('${key}')">${pi}<div class="hero-cap">${d.breaking?'<span class="badge b-break">🔴 ব্রেকিং</span><br>':""}<span class="badge b-red">${cat}</span><h2>${d.title}</h2><div class="meta">✍ ${d.author||"প্রতিবেদক"} | ${fmt(d.createdAt)}</div></div></div>`;
+      return `<div class="hero-side" style="${bgStyle}" onclick="NM.open('${key}')">${pi}<div class="hs-cap"><span class="badge b-red">${cat}</span><h3>${d.title}</h3></div></div>`;
     }
-    if(docs[0]) hh+=hero(docs[0],"h0",true);
-    if(docs[1]) hh+=hero(docs[1],"h1",false);
-    if(docs[2]) hh+=hero(docs[2],"h2",false);
-    if(hh) hg.innerHTML=hh;
+    let hh="";
+    if(docs[0])hh+=hero(docs[0],"h0",true);
+    if(docs[1])hh+=hero(docs[1],"h1",false);
+    if(docs[2])hh+=hero(docs[2],"h2",false);
+    if(hh)hg.innerHTML=hh;
 
     // TICKER
     const tk=document.getElementById("tickerTrack");
@@ -563,8 +524,7 @@ function card(d, key, horiz) {
       if(!cd.length)return;
       const sec=document.getElementById("sec-"+cat);
       const grid=document.getElementById("grid-"+cat);
-      if(sec) sec.style.display="block";
-
+      if(sec)sec.style.display="block";
       if(!grid)return;
       const h=cat==="india";
       grid.innerHTML=cd.slice(0,h?4:3).map((d,i)=>card(d,`c_${cat}_${i}`,h)).join("");
@@ -574,11 +534,45 @@ function card(d, key, horiz) {
     const tl=document.getElementById("trendingList"),tw=document.getElementById("trendingWidget");
     if(tl){
       const bn=["১","২","৩","৪","৫"];
-      tl.innerHTML=docs.slice(0,5).map((d,i)=>{NM.store(`t${i}`,{...d,date:fmt(d.createdAt)});return `<div class="trend-item" onclick="NM.open('t${i}')"><div class="tnum">${bn[i]}</div><div><h5>${d.title}</h5><div class="tm">📅 ${fmt(d.createdAt)}</div></div></div>`;}).join("");
+      tl.innerHTML=docs.slice(0,5).map((d,i)=>{
+        NM.store(`t${i}`,{...d,date:fmt(d.createdAt)});
+        return `<div class="trend-item" onclick="NM.open('t${i}')"><div class="tnum">${bn[i]}</div><div><h5>${d.title}</h5><div class="tm">📅 ${fmt(d.createdAt)}</div></div></div>`;
+      }).join("");
       if(tw)tw.style.display="block";
     }
 
     // LATEST
     const ll=document.getElementById("latestList"),lw=document.getElementById("latestWidget");
     if(ll){
-      ll.innerHTML=docs.slice(0,4).map((d,i)=>{NM.store(`l${i}`,{...d,date:fmt(d.createdAt)});const img=d.imageUrl?
+      ll.innerHTML=docs.slice(0,4).map((d,i)=>{
+        NM.store(`l${i}`,{...d,date:fmt(d.createdAt)});
+        const img=d.imageUrl?`<img src="${d.imageUrl}" style="width:100%;height:100%;object-fit:cover;">`:`<div class="ph ph-1" style="height:54px;font-size:18px;">📰</div>`;
+        return `<div class="sw-item" onclick="NM.open('l${i}')"><div class="sth">${img}</div><div><h5>${d.title}</h5><div class="sm">📅 ${fmt(d.createdAt)}</div></div></div>`;
+      }).join("");
+      if(lw)lw.style.display="block";
+    }
+
+    // ADS
+    try{
+      const topAd=await getDoc(doc(db,"settings","topAd"));
+      if(topAd.exists()&&topAd.data().active){
+        const a=topAd.data();
+        const b=document.getElementById("topAdBanner"),i=document.getElementById("topAdImg"),l=document.getElementById("topAdLink");
+        if(b&&i){i.src=a.imageData;if(a.url)l.href=a.url;b.style.display="block";}
+      }
+      const midAd=await getDoc(doc(db,"settings","midAd"));
+      if(midAd.exists()&&midAd.data().active){
+        const a=midAd.data();
+        const b=document.getElementById("midAdBanner"),i=document.getElementById("midAdImg"),l=document.getElementById("midAdLink");
+        if(b&&i){i.src=a.imageData;if(a.url)l.href=a.url;b.style.display="block";}
+      }
+    }catch(e){}
+
+  }catch(e){
+    console.error(e);
+    document.getElementById("heroGrid").innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:#777;">নিউজ লোড করতে সমস্যা হচ্ছে।</div>';
+  }
+})();
+</script>
+</body>
+</html>
