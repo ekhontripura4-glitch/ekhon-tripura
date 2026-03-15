@@ -46,7 +46,7 @@ button{cursor:pointer;font-family:inherit;}
 .s-fb{background:#1877f2;}.s-wa{background:#25d366;}.s-yt{background:#f00;}
 
 /* NAVBAR */
-.navbar{background:var(--red);box-shadow:0 2px 6px rgba(0,0,0,.15);position:relative;}
+.navbar{background:var(--red);box-shadow:0 2px 6px rgba(0,0,0,.15);position:sticky;top:0;z-index:1000;}
 .nav-wrap{max-width:1200px;margin:auto;padding:0 16px;display:flex;align-items:center;}
 .nav-links{display:flex;align-items:center;flex:1;overflow-x:auto;}
 .nav-links::-webkit-scrollbar{height:0;}
@@ -58,14 +58,14 @@ button{cursor:pointer;font-family:inherit;}
 .ham-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .ham-btn.open span:nth-child(2){opacity:0;transform:scaleX(0);}
 .ham-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.mob-nav{display:none;flex-direction:column;background:#a82a1e;position:absolute;top:100%;left:0;right:0;z-index:1100;max-height:0;overflow:hidden;transition:max-height .32s ease;box-shadow:0 8px 20px rgba(0,0,0,.22);}
+.mob-nav{display:none;flex-direction:column;background:#a82a1e;position:absolute;top:100%;left:0;right:0;z-index:1101;max-height:0;overflow:hidden;transition:max-height .32s ease;box-shadow:0 10px 25px rgba(0,0,0,.5);}
 .mob-nav.open{max-height:520px;}
 .mob-nav a{color:#fff;padding:12px 20px;font-size:14px;font-weight:600;border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:9px;}
 
 /* TICKER */
 .ticker-bar{background:#1a1a1a;display:flex;align-items:center;overflow:hidden;border-bottom:1px solid #2a2a2a;}
 .ticker-label{background:var(--red);color:#fff;padding:7px 14px;font-size:11px;font-weight:700;letter-spacing:1px;white-space:nowrap;flex-shrink:0;}
-.ticker-scroll{flex:1;overflow:hidden;}
+.ticker-scroll{flex:1;overflow:hidden;width:100%;}
 .ticker-track{display:inline-flex;white-space:nowrap;animation:tickerMove 40s linear infinite;}
 .ticker-track:hover{animation-play-state:paused;}
 .ticker-track span{color:#ddd;font-size:13px;padding:7px 36px;border-right:1px solid #333;}
@@ -114,7 +114,7 @@ button{cursor:pointer;font-family:inherit;}
 .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
 .card{background:#fff;border-radius:7px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:box-shadow .22s,transform .22s;display:flex;flex-direction:column;}
 .card:hover{box-shadow:0 6px 22px rgba(0,0,0,.13);transform:translateY(-2px);}
-.card .cimg{height:175px;overflow:hidden;flex-shrink:0;}
+.card .cimg{aspect-ratio:16/9;height:auto;overflow:hidden;flex-shrink:0;}
 .card .cimg .ph{height:100%;}
 .card:hover .cimg .ph{transform:scale(1.04);}
 .card .cimg img{width:100%;height:100%;object-fit:cover;}
@@ -439,7 +439,7 @@ button{cursor:pointer;font-family:inherit;}
           <div class="follow-links">
             <a href="https://facebook.com/share/1buQiZUsW5/" class="fl-fb" target="_blank" rel="noopener"><span style="font-weight:900;font-size:16px;">f</span> Facebook-এ Like করুন</a>
             <a href="https://wa.me/918787391790" class="fl-wa" target="_blank" rel="noopener"><span>💬</span> WhatsApp-এ যোগ দিন</a>
-            <a href="mailto:ekhontripura@gmail.com" class="fl-em"><span>✉️</span> ekhontripura@gmail.com</a>
+            <a href="/cdn-cgi/l/email-protection#adc8c6c5c2c3d9dfc4ddd8dfccedcac0ccc4c183cec2c0" class="fl-em"><span>✉️</span> <span class="__cf_email__" data-cfemail="395c525156574d4b50494c4b58795e54585055175a5654">[email&#160;protected]</span></a>
           </div>
         </div>
       </div>
@@ -456,7 +456,7 @@ button{cursor:pointer;font-family:inherit;}
       <div class="f-socials">
         <a href="https://facebook.com/share/1buQiZUsW5/" target="_blank" rel="noopener">f</a>
         <a href="https://wa.me/918787391790" target="_blank" rel="noopener">W</a>
-        <a href="mailto:ekhontripura@gmail.com">@</a>
+        <a href="/cdn-cgi/l/email-protection#67020c0f080913150e1712150627000a060e0b4904080a">@</a>
       </div>
     </div>
     <div class="footer-col">
@@ -485,7 +485,7 @@ button{cursor:pointer;font-family:inherit;}
     <div class="footer-col">
       <h4>যোগাযোগ</h4>
       <ul>
-        <li><a href="mailto:ekhontripura@gmail.com">📧 ekhontripura@gmail.com</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#f0959b989f9e84829980858291b0979d91999cde939f9d">📧 <span class="__cf_email__" data-cfemail="aacfc1c2c5c4ded8c3dadfd8cbeacdc7cbc3c684c9c5c7">[email&#160;protected]</span></a></li>
         <li><a href="https://wa.me/918787391790">📱 +91 87873 91790</a></li>
         <li><a href="https://facebook.com/share/1buQiZUsW5/" target="_blank" rel="noopener">💻 Facebook Page</a></li>
       </ul>
@@ -513,7 +513,7 @@ button{cursor:pointer;font-family:inherit;}
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── Bengali date ──
 var DAYS=['রবিবার','সোমবার','মঙ্গলবার','বুধবার','বৃহস্পতিবার','শুক্রবার','শনিবার'];
 var MONTHS=['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
@@ -749,19 +749,4 @@ async function loadAll() {
           : `<div class="ph ph-1" style="height:54px;font-size:18px;">📰</div>`;
         return `<div class="sw-item" onclick="openNewsModal('${key}')">
           <div class="sth">${img}</div>
-          <div><h5>${d.data.title}</h5><div class="sm">📅 ${timeAgo(d.data.createdAt)}</div></div>
-        </div>`;
-      }).join('');
-      latestWidget.style.display = 'block';
-    }
-
-  } catch(e) {
-    console.error('Firebase error:', e);
-    document.getElementById('heroGrid').innerHTML = '<div class="news-loading">নিউজ লোড করতে সমস্যা হচ্ছে।</div>';
-  }
-}
-
-loadAll();
-</script>
-</body>
-</html>
+          <di
