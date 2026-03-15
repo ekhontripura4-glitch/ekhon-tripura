@@ -252,28 +252,30 @@ button { cursor: pointer; font-family: inherit; }
 
 /* ===== NEWS MODAL ===== */
 .modal-overlay {
-  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.75); z-index: 9999;
-  display: none; align-items: flex-start; justify-content: center;
-  padding: 20px; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.78); z-index: 9999;
+  overflow-y: auto; -webkit-overflow-scrolling: touch;
+  visibility: hidden; opacity: 0;
+  transition: opacity 0.25s, visibility 0.25s;
 }
-.modal-overlay.open { display: flex; }
+.modal-overlay.open { visibility: visible; opacity: 1; }
 .modal-box {
-  background: #fff; border-radius: 10px; max-width: 780px; width: 100%;
-  margin: auto; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-  animation: modalIn 0.3s ease;
+  background: #fff; border-radius: 10px; max-width: 760px; width: 92%;
+  margin: 30px auto 50px; overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  transform: translateY(20px); transition: transform 0.25s;
 }
-@keyframes modalIn { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-.modal-img { width: 100%; max-height: 360px; object-fit: cover; display: block; }
-.modal-body { padding: 24px; }
+.modal-overlay.open .modal-box { transform: translateY(0); }
+.modal-img { width: 100%; max-height: 340px; object-fit: cover; display: block; }
+.modal-body { padding: 22px; }
 .modal-cat { display: inline-block; background: var(--red); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 3px; margin-bottom: 10px; }
-.modal-title { font-family: 'Noto Serif Bengali', serif; font-size: 22px; font-weight: 900; color: var(--black); line-height: 1.45; margin-bottom: 10px; }
-.modal-meta { font-size: 12px; color: var(--muted); margin-bottom: 18px; display: flex; gap: 14px; flex-wrap: wrap; }
-.modal-content { font-size: 15px; line-height: 1.85; color: #333; white-space: pre-wrap; }
+.modal-title { font-family: 'Noto Serif Bengali', serif; font-size: 21px; font-weight: 900; color: var(--black); line-height: 1.45; margin-bottom: 10px; }
+.modal-meta { font-size: 12px; color: var(--muted); margin-bottom: 16px; display: flex; gap: 14px; flex-wrap: wrap; }
+.modal-content { font-size: 15px; line-height: 1.9; color: #2a2a2a; white-space: pre-wrap; }
 .modal-close {
-  position: sticky; top: 0; background: var(--red); color: #fff;
-  border: none; width: 100%; padding: 12px; font-size: 14px; font-weight: 700;
-  cursor: pointer; font-family: 'Hind Siliguri', sans-serif;
+  background: var(--red); color: #fff; border: none; width: 100%;
+  padding: 13px; font-size: 14px; font-weight: 700; cursor: pointer;
+  font-family: 'Hind Siliguri', sans-serif;
   display: flex; align-items: center; justify-content: center; gap: 8px;
 }
 .modal-close:hover { background: var(--red-dark); }
@@ -763,26 +765,27 @@ button { cursor: pointer; font-family: inherit; }
     document.getElementById('modalAuthor').textContent = data.author ? '✍ ' + data.author : '';
     document.getElementById('modalDate').textContent = data.date ? '📅 ' + data.date : '';
     var img = document.getElementById('modalImg');
-    if(data.imageUrl) {
-      img.src = data.imageUrl;
-      img.style.display = 'block';
-    } else {
-      img.style.display = 'none';
-    }
-    document.getElementById('newsModal').classList.add('open');
+    if(data.imageUrl) { img.src = data.imageUrl; img.style.display = 'block'; }
+    else { img.style.display = 'none'; img.src = ''; }
+    var m = document.getElementById('newsModal');
+    m.scrollTop = 0;
+    m.classList.add('open');
+  };
+
+  window._closeModal = function() {
+    var m = document.getElementById('newsModal');
+    m.classList.remove('open');
+    // Force pointer events restore
+    m.style.pointerEvents = 'none';
+    setTimeout(function(){ m.style.pointerEvents = ''; }, 300);
   };
 
   window.closeModal = function(e) {
-    if(e.target === document.getElementById('newsModal')) {
-      document.getElementById('newsModal').classList.remove('open');
-    }
+    if(e.target === document.getElementById('newsModal')) window._closeModal();
   };
 
-  // Close modal on escape key
   document.addEventListener('keydown', function(e) {
-    if(e.key === 'Escape') {
-      document.getElementById('newsModal').classList.remove('open');
-    }
+    if(e.key === 'Escape') window._closeModal();
   });
 
   document.querySelector('.modal-close') && document.querySelector('.modal-close').addEventListener('click', function(){
