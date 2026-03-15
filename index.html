@@ -196,9 +196,9 @@ button{cursor:pointer;font-family:inherit;}
   display:none;
   position:fixed;top:0;left:0;width:100%;height:100%;
   background:rgba(0,0,0,0.8);z-index:9999;
-  overflow-y:auto;-webkit-overflow-scrolling:touch;
+  overflow-y:scroll;-webkit-overflow-scrolling:touch;
 }
-#newsModal.active{display:block;}
+#newsModal.active{display:block !important;}
 .modal-box{
   background:#fff;border-radius:10px;max-width:760px;width:92%;
   margin:30px auto 60px;overflow:hidden;
@@ -497,9 +497,9 @@ button{cursor:pointer;font-family:inherit;}
 </footer>
 
 <!-- NEWS MODAL -->
-<div id="newsModal" onclick="if(event.target===this)closeNewsModal();">
+<div id="newsModal" onclick="if(event.target===this)window.closeNewsModal();">
   <div class="modal-box">
-    <button class="modal-close-btn" onclick="closeNewsModal()">✕ বন্ধ করুন</button>
+    <button class="modal-close-btn" onclick="window.closeNewsModal()">✕ বন্ধ করুন</button>
     <img id="modalImg" src="" alt="">
     <div class="modal-body">
       <span class="modal-cat" id="modalCat"></span>
@@ -567,11 +567,11 @@ document.querySelectorAll('.nav-links a').forEach(function(a){
 });
 
 // ── NEWS MODAL ──
-var _newsData = {};
+window._newsData = {};
 
-function openNewsModal(key) {
-  var data = _newsData[key];
-  if(!data) return;
+window.openNewsModal = function(key) {
+  var data = window._newsData[key];
+  if(!data){ console.log('No data for key:', key); return; }
   var catNames = {tripura:'ত্রিপুরা',india:'ভারত',international:'আন্তর্জাতিক',politics:'রাজনীতি',sports:'খেলাধুলা',entertainment:'বিনোদন',rashi:'রাশিফল'};
   document.getElementById('modalCat').textContent = catNames[data.category] || data.category || '';
   document.getElementById('modalTitle').textContent = data.title || '';
@@ -583,15 +583,15 @@ function openNewsModal(key) {
   else { img.style.display='none'; img.src=''; }
   var modal = document.getElementById('newsModal');
   modal.scrollTop = 0;
-  modal.classList.add('active');
+  modal.style.display = 'block';
 }
 
-function closeNewsModal() {
-  document.getElementById('newsModal').classList.remove('active');
+window.closeNewsModal = function() {
+  document.getElementById('newsModal').style.display = 'none';
 }
 
 document.addEventListener('keydown',function(e){
-  if(e.key==='Escape') closeNewsModal();
+  if(e.key==='Escape') window.closeNewsModal();
 });
 </script>
 
@@ -630,7 +630,7 @@ function makeCard(data, key, isHoriz) {
     ? `<img src="${data.imageUrl}" style="width:100%;height:100%;object-fit:cover;" loading="lazy">`
     : `<div class="ph ph-1" style="height:100%;">📰</div>`;
   if(isHoriz) {
-    return `<div class="card card-h" onclick="openNewsModal('${key}')">
+    return `<div class="card card-h" onclick="window.openNewsModal('${key}')">
       <div class="cimg">${imgHtml}</div>
       <div class="card-body">
         <span class="badge b-red">${cat}</span>
@@ -639,7 +639,7 @@ function makeCard(data, key, isHoriz) {
       </div>
     </div>`;
   }
-  return `<div class="card" onclick="openNewsModal('${key}')">
+  return `<div class="card" onclick="window.openNewsModal('${key}')">
     <div class="cimg" style="height:175px;">${imgHtml}</div>
     <div class="card-body">
       <span class="badge b-red">${cat}</span>
@@ -654,7 +654,7 @@ function makeHero(data, key, isMain) {
   const cat = catNames[data.category] || data.category || '';
   const bgStyle = data.imageUrl ? `style="background:url('${data.imageUrl}') center/cover no-repeat;"` : '';
   if(isMain) {
-    return `<div class="hero-main" ${bgStyle} onclick="openNewsModal('${key}')">
+    return `<div class="hero-main" ${bgStyle} onclick="window.openNewsModal('${key}')">
       ${!data.imageUrl ? '<div class="himg"><div class="ph ph-1">📰</div></div>' : ''}
       <div class="hero-cap">
         ${data.breaking ? '<span class="badge b-break">🔴 ব্রেকিং</span><br>' : ''}
@@ -664,7 +664,7 @@ function makeHero(data, key, isMain) {
       </div>
     </div>`;
   }
-  return `<div class="hero-side" ${bgStyle} onclick="openNewsModal('${key}')">
+  return `<div class="hero-side" ${bgStyle} onclick="window.openNewsModal('${key}')">
     ${!data.imageUrl ? '<div class="himg"><div class="ph ph-2">📰</div></div>' : ''}
     <div class="hs-cap">
       <span class="badge b-red">${cat}</span>
@@ -729,7 +729,7 @@ async function loadAll() {
       trendingList.innerHTML = docs.slice(0,5).map((d,i) => {
         const key = `trend_${i}`;
         window._newsData[key] = d.data;
-        return `<div class="trend-item" onclick="openNewsModal('${key}')">
+        return `<div class="trend-item" onclick="window.openNewsModal('${key}')">
           <div class="tnum">${bnNums[i]||i+1}</div>
           <div><h5>${d.data.title}</h5><div class="tm">📅 ${timeAgo(d.data.createdAt)}</div></div>
         </div>`;
@@ -747,6 +747,6 @@ async function loadAll() {
         const img = d.data.imageUrl
           ? `<img src="${d.data.imageUrl}" style="width:100%;height:100%;object-fit:cover;">`
           : `<div class="ph ph-1" style="height:54px;font-size:18px;">📰</div>`;
-        return `<div class="sw-item" onclick="openNewsModal('${key}')">
+        return `<div class="sw-item" onclick="window.openNewsModal('${key}')">
           <div class="sth">${img}</div>
           <di
