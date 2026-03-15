@@ -383,7 +383,7 @@ button { cursor: pointer; font-family: inherit; }
       <!-- ত্রিপুরা -->
       <div class="sec-wrap">
         <div class="sec-head"><h2>ত্রিপুরা</h2><a href="#" class="see-all">সব দেখুন →</a></div>
-        <div class="grid-3">
+        <div class="grid-3 news-grid-tripura">
           <div class="card">
             <div class="cimg"><div class="ph ph-1">🏔️</div></div>
             <div class="card-body">
@@ -417,7 +417,7 @@ button { cursor: pointer; font-family: inherit; }
       <!-- ভারত -->
       <div class="sec-wrap">
         <div class="sec-head"><h2>ভারত</h2><a href="#" class="see-all">সব দেখুন →</a></div>
-        <div class="grid-2">
+        <div class="grid-2 news-grid-india">
           <div class="card card-h">
             <div class="cimg"><div class="ph ph-2">🏛️</div></div>
             <div class="card-body">
@@ -440,7 +440,7 @@ button { cursor: pointer; font-family: inherit; }
       <!-- খেলাধুলা -->
       <div class="sec-wrap">
         <div class="sec-head"><h2>খেলাধুলা</h2><a href="#" class="see-all">সব দেখুন →</a></div>
-        <div class="grid-3">
+        <div class="grid-3 news-grid-sports">
           <div class="card">
             <div class="cimg"><div class="ph ph-6">🏏</div></div>
             <div class="card-body">
@@ -703,4 +703,148 @@ button { cursor: pointer; font-family: inherit; }
   document.querySelectorAll('.nav-links a').forEach(function(a){
     a.addEventListener('click',function(e){
       e.preventDefault();
-      document.querySelectorAl
+
+      document.querySelectorAll('.nav-links a').forEach(function(x){x.classList.remove('active');});
+      this.classList.add('active');
+    });
+  });
+
+  /* Rashi click */
+  document.querySelectorAll('.rashi-card').forEach(function(c){
+    c.addEventListener('click',function(){
+      document.querySelectorAll('.rashi-card').forEach(function(x){x.style.borderTopColor='';});
+      this.style.borderTopColor='#c0392b';
+    });
+  });
+
+})();
+</script>
+
+<!-- Firebase Integration -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, collection, query, where, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDilxe-j7wzHGOGhwro3ugOo94r_iIXvPI",
+    authDomain: "ekhon-tripura-c809b.firebaseapp.com",
+    projectId: "ekhon-tripura-c809b",
+    storageBucket: "ekhon-tripura-c809b.firebasestorage.app",
+    messagingSenderId: "735998815074",
+    appId: "1:735998815074:web:75c592d729e2bc30c05a3b"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const catNames = {
+    tripura:'ত্রিপুরা', india:'ভারত', international:'আন্তর্জাতিক',
+    politics:'রাজনীতি', sports:'খেলাধুলা', entertainment:'বিনোদন', rashi:'রাশিফল'
+  };
+
+  function timeAgo(ts) {
+    if(!ts) return '';
+    const d = new Date(ts.seconds*1000);
+    return d.toLocaleDateString('bn-BD');
+  }
+
+  function cardHTML(doc) {
+    const d = doc.data();
+    const cat = catNames[d.category] || d.category;
+    const img = d.imageUrl
+      ? `<img src="${d.imageUrl}" style="width:100%;height:100%;object-fit:cover;">`
+      : `<div class="ph ph-1" style="height:175px;">📰</div>`;
+    return `
+      <div class="card">
+        <div class="cimg" style="height:175px;overflow:hidden;">${img}</div>
+        <div class="card-body">
+          ${d.breaking ? '<span class="badge b-break">🔴 Breaking</span>' : ''}
+          <span class="badge b-red">${cat}</span>
+          <h3>${d.title}</h3>
+          <p>${d.excerpt || ''}</p>
+          <div class="cmeta"><span>📅 ${timeAgo(d.createdAt)}</span>${d.author ? `<span>✍ ${d.author}</span>` : ''}</div>
+        </div>
+      </div>`;
+  }
+
+  function heroHTML(doc, isMain) {
+    const d = doc.data();
+    const cat = catNames[d.category] || d.category;
+    const bgStyle = d.imageUrl
+      ? `background:url('${d.imageUrl}') center/cover no-repeat;`
+      : '';
+    if(isMain) {
+      return `
+        <div class="hero-main" style="${bgStyle}">
+          ${!d.imageUrl ? '<div class="himg"><div class="ph ph-1">📰</div></div>' : ''}
+          <div class="hero-cap">
+            ${d.breaking ? '<span class="badge b-break">🔴 ব্রেকিং নিউজ</span><br>' : ''}
+            <span class="badge b-red">${cat}</span>
+            <h2>${d.title}</h2>
+            <div class="meta">✍ ${d.author || 'প্রতিবেদক'} &nbsp;|&nbsp; ${timeAgo(d.createdAt)}</div>
+          </div>
+        </div>`;
+    } else {
+      return `
+        <div class="hero-side" style="${bgStyle}">
+          ${!d.imageUrl ? '<div class="himg"><div class="ph ph-2">📰</div></div>' : ''}
+          <div class="hs-cap">
+            <span class="badge b-red">${cat}</span>
+            <h3>${d.title}</h3>
+          </div>
+        </div>`;
+    }
+  }
+
+  async function loadNews() {
+    try {
+      const q = query(
+        collection(db, 'news'),
+        where('status', '==', 'published'),
+        orderBy('createdAt', 'desc'),
+        limit(20)
+      );
+      const snap = await getDocs(q);
+      if(snap.empty) return;
+
+      const docs = [];
+      snap.forEach(d => docs.push(d));
+
+      // Update hero section
+      const heroGrid = document.querySelector('.hero-grid');
+      if(heroGrid && docs.length > 0) {
+        let heroHTML_str = '';
+        heroHTML_str += heroHTML(docs[0], true);
+        if(docs[1]) heroHTML_str += heroHTML(docs[1], false);
+        if(docs[2]) heroHTML_str += heroHTML(docs[2], false);
+        heroGrid.innerHTML = heroHTML_str;
+      }
+
+      // Update news grids by category
+      const cats = ['tripura','india','sports','entertainment','politics'];
+      cats.forEach(cat => {
+        const catDocs = docs.filter(d => d.data().category === cat);
+        if(catDocs.length === 0) return;
+
+        const grid = document.querySelector(`.news-grid-${cat}`);
+        if(grid) {
+          grid.innerHTML = catDocs.slice(0,3).map(d => cardHTML(d)).join('');
+        }
+      });
+
+      // Update ticker
+      const ticker = document.querySelector('.ticker-track');
+      if(ticker && docs.length > 0) {
+        const items = docs.slice(0,7).map(d => `<span>${d.data().title}</span>`).join('');
+        ticker.innerHTML = items + items;
+      }
+
+    } catch(e) {
+      console.log('Firebase load error:', e);
+    }
+  }
+
+  loadNews();
+</script>
+</body>
+</html>
