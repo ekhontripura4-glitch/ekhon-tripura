@@ -185,6 +185,9 @@ body { font-family: 'Hind Siliguri', sans-serif; background: var(--bg); color: v
       <button class="sidebar-item" onclick="showSection('list')" id="tab-list">
         <span class="icon">📋</span> সব নিউজ
       </button>
+      <button class="sidebar-item" onclick="showSection('ads')" id="tab-ads">
+        <span class="icon">📢</span> বিজ্ঞাপন
+      </button>
     </div>
 
     <!-- Main -->
@@ -288,6 +291,61 @@ body { font-family: 'Hind Siliguri', sans-serif; background: var(--bg); color: v
         </div>
       </div>
 
+      <!-- ADS PANEL -->
+      <div class="panel" id="sectionAds" style="display:none;">
+        <div class="panel-head">
+          <h2>📢 বিজ্ঞাপন ব্যবস্থাপনা</h2>
+        </div>
+        <div class="panel-body">
+          <p style="font-size:13px;color:#6b7280;margin-bottom:20px;">এখানে বিজ্ঞাপনের ছবি upload করুন। ছবি upload করলে website এ দেখাবে, না করলে দেখাবে না।</p>
+
+          <!-- Top Banner Ad -->
+          <div style="margin-bottom:24px;padding:16px;background:#f9fafb;border-radius:8px;border:1.5px solid var(--border);">
+            <h3 style="font-family:'Noto Serif Bengali',serif;font-size:15px;margin-bottom:12px;">🔝 Top Banner (Ticker এর নিচে)</h3>
+            <div class="form-group">
+              <label>বিজ্ঞাপনের ছবি</label>
+              <div class="img-upload-area" onclick="document.getElementById('topAdFile').click()">
+                <input type="file" id="topAdFile" accept="image/*" onchange="previewAd('topAdFile','topAdPreview')">
+                <div class="upload-icon">🖼️</div>
+                <p>ছবি select করুন (728×90 বা 1200×120 size ভালো)</p>
+              </div>
+              <img id="topAdPreview" style="margin-top:10px;max-height:100px;width:100%;object-fit:cover;border-radius:6px;display:none;">
+            </div>
+            <div class="form-group" style="margin-top:10px;">
+              <label>Click করলে কোথায় যাবে? (URL)</label>
+              <input type="url" id="topAdUrl" placeholder="https://...">
+            </div>
+            <div class="form-actions" style="margin-top:10px;">
+              <button class="btn btn-danger" onclick="removeAd('top')">🗑️ Remove</button>
+              <button class="btn btn-primary" onclick="saveAd('top')">💾 Save করুন</button>
+            </div>
+          </div>
+
+          <!-- Middle Banner Ad -->
+          <div style="padding:16px;background:#f9fafb;border-radius:8px;border:1.5px solid var(--border);">
+            <h3 style="font-family:'Noto Serif Bengali',serif;font-size:15px;margin-bottom:12px;">📰 Middle Banner (নিউজের মাঝে)</h3>
+            <div class="form-group">
+              <label>বিজ্ঞাপনের ছবি</label>
+              <div class="img-upload-area" onclick="document.getElementById('midAdFile').click()">
+                <input type="file" id="midAdFile" accept="image/*" onchange="previewAd('midAdFile','midAdPreview')">
+                <div class="upload-icon">🖼️</div>
+                <p>ছবি select করুন (728×90 বা 1200×120 size ভালো)</p>
+              </div>
+              <img id="midAdPreview" style="margin-top:10px;max-height:100px;width:100%;object-fit:cover;border-radius:6px;display:none;">
+            </div>
+            <div class="form-group" style="margin-top:10px;">
+              <label>Click করলে কোথায় যাবে? (URL)</label>
+              <input type="url" id="midAdUrl" placeholder="https://...">
+            </div>
+            <div class="form-actions" style="margin-top:10px;">
+              <button class="btn btn-danger" onclick="removeAd('mid')">🗑️ Remove</button>
+              <button class="btn btn-primary" onclick="saveAd('mid')">💾 Save করুন</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
       <!-- NEWS LIST PANEL -->
       <div class="panel section-list" id="sectionList" style="display:none;">
         <div class="panel-head">
@@ -310,7 +368,7 @@ body { font-family: 'Hind Siliguri', sans-serif; background: var(--bg); color: v
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-  import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, orderBy, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, setDoc, getDoc, orderBy, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDilxe-j7wzHGOGhwro3ugOo94r_iIXvPI",
@@ -396,9 +454,12 @@ body { font-family: 'Hind Siliguri', sans-serif; background: var(--bg); color: v
   window.showSection = function(sec) {
     document.getElementById('sectionAdd').style.display  = sec === 'add'  ? 'block' : 'none';
     document.getElementById('sectionList').style.display = sec === 'list' ? 'block' : 'none';
+    document.getElementById('sectionAds').style.display  = sec === 'ads'  ? 'block' : 'none';
     document.getElementById('tab-add').classList.toggle('active',  sec === 'add');
     document.getElementById('tab-list').classList.toggle('active', sec === 'list');
-    if (sec === 'list') loadNewsList();
+    document.getElementById('tab-ads').classList.toggle('active',  sec === 'ads');
+    if(sec === 'list') loadNewsList();
+    if(sec === 'ads') loadAdPreviews();
   };
 
   // ── Submit news ──
@@ -581,6 +642,93 @@ body { font-family: 'Hind Siliguri', sans-serif; background: var(--bg); color: v
   document.addEventListener('keydown', e => {
     if (e.key === 'Enter' && document.getElementById('loginWrap').style.display !== 'none') doLogin();
   });
+
+  // ── Ad Preview ──
+  window.previewAd = function(inputId, previewId) {
+    const input = document.getElementById(inputId);
+    const preview = document.getElementById(previewId);
+    if(input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = e => { preview.src = e.target.result; preview.style.display = 'block'; };
+      reader.readAsDataURL(input.files[0]);
+    }
+  };
+
+  // ── Save Ad ──
+  window.saveAd = async function(position) {
+    const fileInput = document.getElementById(position+'AdFile');
+    const urlInput = document.getElementById(position+'AdUrl').value.trim();
+    if(!fileInput.files[0]) { showToast('ছবি select করুন!', 'error'); return; }
+
+    const btn = event.target;
+    btn.disabled = true; btn.textContent = 'Saving...';
+
+    try {
+      // Compress image
+      const imageData = await new Promise(resolve => {
+        const file = fileInput.files[0];
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const img = new Image();
+        const reader = new FileReader();
+        reader.onload = e => {
+          img.onload = () => {
+            const maxW = 1200;
+            const ratio = Math.min(maxW / img.width, 1);
+            canvas.width = img.width * ratio;
+            canvas.height = img.height * ratio;
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            resolve(canvas.toDataURL('image/jpeg', 0.8));
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+
+      await setDoc(doc(db, 'settings', position+'Ad'), {
+        imageData, url: urlInput, active: true, updatedAt: serverTimestamp()
+      });
+
+      showToast('✅ বিজ্ঞাপন save হয়েছে!', 'success');
+    } catch(e) {
+      showToast('Error: '+e.message, 'error');
+    } finally {
+      btn.disabled = false; btn.textContent = '💾 Save করুন';
+    }
+  };
+
+  // ── Remove Ad ──
+  window.removeAd = async function(position) {
+    if(!confirm('এই বিজ্ঞাপন remove করবেন?')) return;
+    try {
+      await deleteDoc(doc(db, 'settings', position+'Ad'));
+      document.getElementById(position+'AdPreview').style.display = 'none';
+      document.getElementById(position+'AdFile').value = '';
+      document.getElementById(position+'AdUrl').value = '';
+      showToast('বিজ্ঞাপন remove হয়েছে', 'success');
+    } catch(e) { showToast('Error: '+e.message, 'error'); }
+  };
+
+  // ── Load Ad Previews ──
+  window.loadAdPreviews = async function() {
+    try {
+      const topSnap = await getDoc(doc(db, 'settings', 'topAd'));
+      if(topSnap.exists()) {
+        const d = topSnap.data();
+        document.getElementById('topAdPreview').src = d.imageData;
+        document.getElementById('topAdPreview').style.display = 'block';
+        document.getElementById('topAdUrl').value = d.url || '';
+      }
+      const midSnap = await getDoc(doc(db, 'settings', 'midAd'));
+      if(midSnap.exists()) {
+        const d = midSnap.data();
+        document.getElementById('midAdPreview').src = d.imageData;
+        document.getElementById('midAdPreview').style.display = 'block';
+        document.getElementById('midAdUrl').value = d.url || '';
+      }
+    } catch(e) {}
+  };
 </script>
+
 </body>
 </html>
