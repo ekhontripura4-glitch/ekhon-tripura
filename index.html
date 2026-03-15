@@ -384,149 +384,47 @@ button { cursor: pointer; font-family: inherit; }
     <main>
 
       <!-- HERO -->
-      <div class="hero-grid">
-        <div class="hero-main">
-          <div class="himg"><div class="ph ph-1">📰</div></div>
-          <div class="hero-cap">
-            <span class="badge b-break">🔴 ব্রেকিং নিউজ</span><br>
-            <span class="badge b-red" style="margin-top:4px;">ত্রিপুরা</span>
-            <h2>ভারত-বাংলা সীমান্তে দালাল চক্রের নড়াচড়া, চেরমা থেকে সন্দেহভাজন দুইজন আটক!</h2>
-            <div class="meta">✍ সুমন দেবনাথ &nbsp;|&nbsp; ১১ মার্চ ২০২৬</div>
-          </div>
-        </div>
-        <div class="hero-side">
-          <div class="himg"><div class="ph ph-2">🏛️</div></div>
-          <div class="hs-cap">
-            <span class="badge b-red">রাজনীতি</span>
-            <h3>মুর্মুকে পালটা মমতার — 'রাষ্ট্রপতিকে পলিটিক্স বেচতে পাঠিয়েছে BJP'</h3>
-          </div>
-        </div>
-        <div class="hero-side">
-          <div class="himg"><div class="ph ph-5">⚡</div></div>
-          <div class="hs-cap">
-            <span class="badge b-red">ভারত</span>
-            <h3>হরমুজ প্রণালী ইস্যুতে নড়েচড়ে বসলো দিল্লি!</h3>
-          </div>
+      <div class="hero-grid" id="heroGrid">
+        <div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted);">
+          <div style="font-size:30px;margin-bottom:10px;">⏳</div>
+          <div>নিউজ লোড হচ্ছে...</div>
         </div>
       </div>
 
       <!-- ত্রিপুরা -->
-      <div class="sec-wrap">
+      <div class="sec-wrap" id="sec-tripura" style="display:none;">
         <div class="sec-head"><h2>ত্রিপুরা</h2><a href="#" class="see-all">সব দেখুন →</a></div>
-        <div class="grid-3 news-grid-tripura">
-          <div class="card">
-            <div class="cimg"><div class="ph ph-1">🏔️</div></div>
-            <div class="card-body">
-              <span class="badge b-red">ত্রিপুরা</span>
-              <h3>তেলিয়ামুড়ায় বিপর্যয় মোকাবিলা প্রশিক্ষণে যন্ত্র বিকল! আবারও প্রশাসনের প্রস্তুতি নিয়ে প্রশ্ন!</h3>
-              <p>তেলিয়ামুড়ায় আয়োজিত বিপর্যয় মোকাবিলা প্রশিক্ষণে গুরুত্বপূর্ণ যন্ত্র বিকল হয়ে পড়ায় ব্যাপক সমালোচনা।</p>
-              <div class="cmeta"><span>📅 ১০ মার্চ ২০২৬</span></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="cimg"><div class="ph ph-3">🔥</div></div>
-            <div class="card-body">
-              <span class="badge b-red">ত্রিপুরা</span>
-              <h3>অগ্নিকাণ্ডে ক্ষতিগ্রস্ত ব্যবসায়ীদের পাশে বিধায়িকা কল্যাণী সাহা রায়!</h3>
-              <p>অগ্নিকাণ্ডে ক্ষতিগ্রস্ত ব্যবসায়ীদের পাশে দাঁড়িয়ে সহায়তার আশ্বাস দিলেন বিধায়িকা।</p>
-              <div class="cmeta"><span>📅 ৭ মার্চ ২০২৬</span></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="cimg"><div class="ph ph-4">👨‍🎓</div></div>
-            <div class="card-body">
-              <span class="badge b-red">ত্রিপুরা</span>
-              <h3>তেলিয়ামুড়ায় অসহায় ছাত্র অনির্বাণ — মায়ের মৃত্যুর পর চরম সংকটে পরিবার!</h3>
-              <p>মায়ের অকালমৃত্যুর পর সংসারের দায় এসে পড়েছে কিশোর অনির্বাণের কাঁধে।</p>
-              <div class="cmeta"><span>📅 ৭ মার্চ ২০২৬</span></div>
-            </div>
-          </div>
-        </div>
+        <div class="grid-3 news-grid-tripura"></div>
       </div>
 
       <!-- ভারত -->
-      <div class="sec-wrap">
+      <div class="sec-wrap" id="sec-india" style="display:none;">
         <div class="sec-head"><h2>ভারত</h2><a href="#" class="see-all">সব দেখুন →</a></div>
-        <div class="grid-2 news-grid-india">
-          <div class="card card-h">
-            <div class="cimg"><div class="ph ph-2">🏛️</div></div>
-            <div class="card-body">
-              <span class="badge b-red">ভারত</span>
-              <h3>উপ-রাষ্ট্রপতি সিপি রাধাকৃষ্ণাণ দু'দিনের সফরে রাজ্যে পৌঁছালেন!</h3>
-              <div class="cmeta"><span>📅 ৭ মার্চ ২০২৬</span></div>
-            </div>
-          </div>
-          <div class="card card-h">
-            <div class="cimg"><div class="ph ph-5">🗣️</div></div>
-            <div class="card-body">
-              <span class="badge b-red">রাজনীতি</span>
-              <h3>পাহাড়ে জয়ের লক্ষ্যে বিজেপির সাংগঠনিক বৈঠক, উপস্থিত মুখ্যমন্ত্রী!</h3>
-              <div class="cmeta"><span>📅 ৭ মার্চ ২০২৬</span></div>
-            </div>
-          </div>
-        </div>
+        <div class="grid-2 news-grid-india"></div>
+      </div>
+
+      <!-- রাজনীতি -->
+      <div class="sec-wrap" id="sec-politics" style="display:none;">
+        <div class="sec-head"><h2>রাজনীতি</h2><a href="#" class="see-all">সব দেখুন →</a></div>
+        <div class="grid-3 news-grid-politics"></div>
       </div>
 
       <!-- খেলাধুলা -->
-      <div class="sec-wrap">
+      <div class="sec-wrap" id="sec-sports" style="display:none;">
         <div class="sec-head"><h2>খেলাধুলা</h2><a href="#" class="see-all">সব দেখুন →</a></div>
-        <div class="grid-3 news-grid-sports">
-          <div class="card">
-            <div class="cimg"><div class="ph ph-6">🏏</div></div>
-            <div class="card-body">
-              <span class="badge b-red">খেলা</span>
-              <h3>বাংলাদেশের ক্রিকেটকর্তারা কেন ভারতে না খেলতে অনড়? ক্ষতি কার?</h3>
-              <div class="cmeta"><span>📅 ১৬ জানুয়ারি ২০২৬</span></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="cimg"><div class="ph ph-2">⚽</div></div>
-            <div class="card-body">
-              <span class="badge b-red">খেলা</span>
-              <h3>আইপিএল ২০২৬ — ত্রিপুরার নতুন ক্রিকেটার জায়গা পেলেন দলে!</h3>
-              <div class="cmeta"><span>📅 ৮ মার্চ ২০২৬</span></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="cimg"><div class="ph ph-1">🏆</div></div>
-            <div class="card-body">
-              <span class="badge b-red">খেলা</span>
-              <h3>রাজ্য ফুটবল টুর্নামেন্টে আগরতলার দলের দুর্দান্ত জয়!</h3>
-              <div class="cmeta"><span>📅 ৯ মার্চ ২০২৬</span></div>
-            </div>
-          </div>
-        </div>
+        <div class="grid-3 news-grid-sports"></div>
       </div>
 
       <!-- বিনোদন -->
-      <div class="sec-wrap">
+      <div class="sec-wrap" id="sec-entertainment" style="display:none;">
         <div class="sec-head"><h2>বিনোদন</h2><a href="#" class="see-all">সব দেখুন →</a></div>
-        <div class="list-news">
-          <div class="list-item">
-            <div class="lthumb"><div class="ph ph-4">🎬</div></div>
-            <div class="linfo">
-              <span class="badge b-red">বিনোদন</span>
-              <h4>বলিউডের নতুন ছবিতে ত্রিপুরার শিল্পী! রাজ্যবাসীর গর্ব!</h4>
-              <div class="lmeta">📅 ৯ মার্চ ২০২৬</div>
-            </div>
-          </div>
-          <div class="list-item">
-            <div class="lthumb"><div class="ph ph-5">🎵</div></div>
-            <div class="linfo">
-              <span class="badge b-red">বিনোদন</span>
-              <h4>বাংলা সিনেমার নতুন গান রিলিজ — ইতিমধ্যে ভাইরাল!</h4>
-              <div class="lmeta">📅 ৮ মার্চ ২০২৬</div>
-            </div>
-          </div>
-          <div class="list-item">
-            <div class="lthumb"><div class="ph ph-3">📺</div></div>
-            <div class="linfo">
-              <span class="badge b-red">বিনোদন</span>
-              <h4>জনপ্রিয় টিভি সিরিয়ালের নতুন মোড় — দর্শকরা অবাক!</h4>
-              <div class="lmeta">📅 ৭ মার্চ ২০২৬</div>
-            </div>
-          </div>
-        </div>
+        <div class="grid-3 news-grid-entertainment"></div>
+      </div>
+
+      <!-- আন্তর্জাতিক -->
+      <div class="sec-wrap" id="sec-international" style="display:none;">
+        <div class="sec-head"><h2>আন্তর্জাতিক</h2><a href="#" class="see-all">সব দেখুন →</a></div>
+        <div class="grid-3 news-grid-international"></div>
       </div>
 
       <!-- রাশিফল -->
@@ -917,16 +815,28 @@ button { cursor: pointer; font-family: inherit; }
       }
 
       // Update news grids by category
-      const cats = ['tripura','india','sports','entertainment','politics'];
+      const cats = ['tripura','india','sports','entertainment','politics','international'];
       cats.forEach(cat => {
         const catDocs = docs.filter(d => d.data().category === cat);
-        if(catDocs.length === 0) return;
-
-        const grid = document.querySelector(`.news-grid-${cat}`);
-        if(grid) {
-          grid.innerHTML = catDocs.slice(0,3).map((d,i) => cardHTML(d, d.id)).join(''); grid.querySelectorAll('.card[data-newskey]').forEach(function(el){ el.addEventListener('click', function(){ openNewsModal(window._newsStore[this.dataset.newskey]); }); });
+        const sec = document.getElementById('sec-' + cat);
+        const grid = document.querySelector('.news-grid-' + cat);
+        if(catDocs.length === 0 || !grid) return;
+        if(sec) sec.style.display = 'block';
+        if(cat === 'india') {
+          grid.innerHTML = catDocs.slice(0,4).map((d,i) => cardHTML(d, d.id)).join('');
+        } else {
+          grid.innerHTML = catDocs.slice(0,3).map((d,i) => cardHTML(d, d.id)).join('');
         }
+        grid.querySelectorAll('.card[data-newskey]').forEach(function(el){
+          el.addEventListener('click', function(){
+            openNewsModal(window._newsStore[this.dataset.newskey]);
+          });
+        });
       });
+
+      // Hide loading spinner
+      var heroLoadingDiv = document.querySelector('#heroGrid > div');
+      if(heroLoadingDiv && docs.length > 0) heroLoadingDiv.style.display = 'none';
 
       // Update ticker
       const ticker = document.querySelector('.ticker-track');
