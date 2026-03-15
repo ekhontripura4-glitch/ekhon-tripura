@@ -242,9 +242,26 @@ body { font-family: 'Hind Siliguri', sans-serif; background: var(--bg); color: v
           </div>
           <div class="form-row">
             <div class="form-group full">
-              <label>ছবির URL (Image Link)</label>
-              <input type="url" id="newsImageUrl" placeholder="https://... ছবির link paste করুন" oninput="previewImageUrl(this.value)">
-              <p style="font-size:11px;color:#6b7280;margin-top:4px;">💡 Facebook/Google Drive/যেকোনো জায়গা থেকে ছবির link copy করে paste করুন</p>
+              <label>ছবি (Image)</label>
+              <!-- Tab buttons -->
+              <div style="display:flex;gap:8px;margin-bottom:10px;">
+                <button type="button" onclick="switchTab('file')" id="tabFile" style="padding:7px 16px;border-radius:6px;border:none;background:var(--red);color:#fff;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;">📁 File থেকে</button>
+                <button type="button" onclick="switchTab('url')" id="tabUrl" style="padding:7px 16px;border-radius:6px;border:1.5px solid var(--border);background:#f5f5f5;color:#555;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;">🔗 URL দিয়ে</button>
+              </div>
+              <!-- File upload -->
+              <div id="fileTab">
+                <div class="img-upload-area" onclick="document.getElementById('imgFileInput').click()">
+                  <input type="file" id="imgFileInput" accept="image/*" onchange="previewFile(this)">
+                  <div class="upload-icon">📷</div>
+                  <p>ছবি upload করতে এখানে click করুন</p>
+                  <p style="font-size:11px;margin-top:4px;">JPG, PNG, WEBP সাপোর্টেড</p>
+                </div>
+              </div>
+              <!-- URL input -->
+              <div id="urlTab" style="display:none;">
+                <input type="url" id="newsImageUrl" placeholder="https://i.ibb.co/... ছবির link paste করুন" oninput="previewImageUrl(this.value)">
+                <p style="font-size:11px;color:#6b7280;margin-top:4px;">💡 imgbb.com থেকে Direct link copy করে paste করুন</p>
+              </div>
               <img id="imgPreview" class="img-preview" style="margin-top:10px;max-height:200px;border-radius:6px;display:none;">
             </div>
           </div>
@@ -340,10 +357,38 @@ body { font-family: 'Hind Siliguri', sans-serif; background: var(--bg); color: v
     await signOut(auth);
   };
 
+  // ── Tab switch ──
+  window.switchTab = function(tab) {
+    const fileTab = document.getElementById('fileTab');
+    const urlTab = document.getElementById('urlTab');
+    const tabFile = document.getElementById('tabFile');
+    const tabUrl = document.getElementById('tabUrl');
+    if(tab === 'file') {
+      fileTab.style.display = 'block'; urlTab.style.display = 'none';
+      tabFile.style.background = 'var(--red)'; tabFile.style.color = '#fff'; tabFile.style.border = 'none';
+      tabUrl.style.background = '#f5f5f5'; tabUrl.style.color = '#555'; tabUrl.style.border = '1.5px solid var(--border)';
+    } else {
+      fileTab.style.display = 'none'; urlTab.style.display = 'block';
+      tabUrl.style.background = 'var(--red)'; tabUrl.style.color = '#fff'; tabUrl.style.border = 'none';
+      tabFile.style.background = '#f5f5f5'; tabFile.style.color = '#555'; tabFile.style.border = '1.5px solid var(--border)';
+    }
+    document.getElementById('imgPreview').style.display = 'none';
+  };
+
+  // ── File preview ──
+  window.previewFile = function(input) {
+    const preview = document.getElementById('imgPreview');
+    if(input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = e => { preview.src = e.target.result; preview.style.display = 'block'; };
+      reader.readAsDataURL(input.files[0]);
+    }
+  };
+
   // ── Image URL preview ──
   window.previewImageUrl = function(url) {
     const preview = document.getElementById('imgPreview');
-    if (url) { preview.src = url; preview.style.display = 'block'; preview.onerror = () => { preview.style.display = 'none'; }; }
+    if(url) { preview.src = url; preview.style.display = 'block'; preview.onerror = () => { preview.style.display = 'none'; }; }
     else { preview.style.display = 'none'; }
   };
 
@@ -375,7 +420,38 @@ body { font-family: 'Hind Siliguri', sans-serif; background: var(--bg); color: v
     btn.innerHTML = '<span class="spinner"></span> Uploading...';
 
     try {
-      const imageUrl = document.getElementById('newsImageUrl').value.trim();
+      // Get image - file or URL
+      let imageUrl = '';
+      const fileInput = document.getElementById('imgFileInput');
+      const urlInput = document.getElementById('newsImageUrl').value.trim();
+      const fileTab = document.getElementById('fileTab');
+
+      if(fileTab.style.display !== 'none' && fileInput.files[0]) {
+        btn.innerHTML = '<span class="spinner"></span> ছবি compress হচ্ছে...';
+        // Compress and convert to base64
+        imageUrl = await new Promise((resolve) => {
+          const file = fileInput.files[0];
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          const img = new Image();
+          const reader = new FileReader();
+          reader.onload = e => {
+            img.onload = () => {
+              // Resize to max 800px width
+              const maxW = 800;
+              const ratio = Math.min(maxW / img.width, 1);
+              canvas.width = img.width * ratio;
+              canvas.height = img.height * ratio;
+              ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+              resolve(canvas.toDataURL('image/jpeg', 0.7));
+            };
+            img.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        });
+      } else {
+        imageUrl = urlInput;
+      }
 
       // Save to Firestore
       await addDoc(collection(db, 'news'), {
@@ -405,6 +481,7 @@ body { font-family: 'Hind Siliguri', sans-serif; background: var(--bg); color: v
     document.getElementById('newsStatus').value = 'published';
     document.getElementById('newsBreaking').value = 'false';
     document.getElementById('newsImageUrl').value = '';
+    document.getElementById('imgFileInput').value = '';
     document.getElementById('imgPreview').style.display = 'none';
   };
 
