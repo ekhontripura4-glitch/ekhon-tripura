@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>এখন ত্রিপুরা — Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --red: #c0392b; --red-dark: #96281b;
+  --black: #111; --white: #fff;
+  --bg: #f0f2f5; --border: #dde1e7;
+  --text: #1a1a1a; --muted: #6b7280;
+  --green: #16a34a; --orange: #d97706;
+}
+body { font-family: 'Hind Siliguri', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+/* LOGIN */
+.login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1a1a1a, #c0392b); }
+.login-box { background: #fff; border-radius: 14px; padding: 40px 36px; width: 100%; max-width: 380px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); text-align: center; }
+.login-logo { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; margin: 0 auto 14px; display: block; border: 3px solid var(--red); }
+.login-box h1 { font-family: 'Noto Serif Bengali', serif; font-size: 22px; color: var(--red); margin-bottom: 4px; }
+.login-box p { font-size: 13px; color: var(--muted); margin-bottom: 26px; }
+.login-box input { width: 100%; padding: 11px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Hind Siliguri', sans-serif; font-size: 14px; outline: none; margin-bottom: 12px; transition: border .2s; }
+.login-box input:focus { border-color: var(--red); }
+.login-box button { width: 100%; padding: 12px; background: var(--red); color: #fff; border: none; border-radius: 8px; font-family: 'Hind Siliguri', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: background .2s; }
+.login-box button:hover { background: var(--red-dark); }
+.login-error { color: var(--red); font-size: 13px; margin-top: 10px; display: none; }
+
+/* DASHBOARD */
+.dashboard { display: none; min-height: 100vh; }
+
+/* TOP NAV */
+.topnav { background: var(--black); padding: 0 20px; display: flex; align-items: center; justify-content: space-between; height: 56px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,.3); }
+.topnav-brand { display: flex; align-items: center; gap: 10px; }
+.topnav-brand img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid var(--red); }
+.topnav-brand span { font-family: 'Noto Serif Bengali', serif; font-size: 16px; font-weight: 900; color: #fff; }
+.topnav-brand small { color: #aaa; font-size: 11px; display: block; line-height: 1; }
+.topnav-right { display: flex; align-items: center; gap: 12px; }
+.btn-logout { background: #333; color: #fff; border: none; padding: 7px 14px; border-radius: 6px; font-size: 13px; cursor: pointer; font-family: inherit; transition: background .2s; }
+.btn-logout:hover { background: var(--red); }
+
+/* LAYOUT */
+.dash-body { max-width: 1100px; margin: 0 auto; padding: 24px 16px; display: grid; grid-template-columns: 220px 1fr; gap: 20px; }
+
+/* SIDEBAR */
+.sidebar { display: flex; flex-direction: column; gap: 6px; }
+.sidebar-item { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all .2s; color: var(--muted); border: none; background: none; width: 100%; text-align: left; }
+.sidebar-item:hover { background: #fff; color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+.sidebar-item.active { background: var(--red); color: #fff; }
+.sidebar-item span.icon { font-size: 17px; }
+
+/* STATS */
+.stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 20px; }
+.stat-card { background: #fff; border-radius: 10px; padding: 18px; box-shadow: 0 1px 4px rgba(0,0,0,.07); }
+.stat-card .snum { font-size: 32px; font-weight: 900; color: var(--red); line-height: 1; }
+.stat-card .slabel { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+/* MAIN CONTENT */
+.main-panel { display: flex; flex-direction: column; gap: 20px; }
+
+/* PANELS */
+.panel { background: #fff; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,.07); overflow: hidden; }
+.panel-head { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.panel-head h2 { font-family: 'Noto Serif Bengali', serif; font-size: 17px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.panel-body { padding: 20px; }
+
+/* FORM */
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full { grid-column: 1/-1; }
+.form-group label { font-size: 13px; font-weight: 600; color: var(--muted); }
+.form-group input, .form-group select, .form-group textarea {
+  padding: 10px 13px; border: 1.5px solid var(--border); border-radius: 7px;
+  font-family: 'Hind Siliguri', sans-serif; font-size: 14px; outline: none;
+  transition: border .2s; background: #fafafa;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--red); background: #fff; }
+.form-group textarea { resize: vertical; min-height: 120px; }
+
+/* Image upload */
+.img-upload-area {
+  border: 2px dashed var(--border); border-radius: 8px; padding: 20px;
+  text-align: center; cursor: pointer; transition: all .2s; background: #fafafa;
+}
+.img-upload-area:hover { border-color: var(--red); background: #fff8f8; }
+.img-upload-area input { display: none; }
+.img-upload-area .upload-icon { font-size: 32px; margin-bottom: 8px; }
+.img-upload-area p { font-size: 13px; color: var(--muted); }
+.img-preview { width: 100%; max-height: 200px; object-fit: cover; border-radius: 6px; margin-top: 10px; display: none; }
+
+/* Buttons */
+.btn { padding: 10px 22px; border-radius: 7px; font-family: 'Hind Siliguri', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; border: none; transition: all .2s; }
+.btn-primary { background: var(--red); color: #fff; }
+.btn-primary:hover { background: var(--red-dark); }
+.btn-secondary { background: #f3f4f6; color: var(--text); }
+.btn-secondary:hover { background: #e5e7eb; }
+.btn-danger { background: #fee2e2; color: #dc2626; }
+.btn-danger:hover { background: #fecaca; }
+.btn-success { background: #dcfce7; color: var(--green); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+
+.form-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 6px; }
+
+/* Toast */
+.toast { position: fixed; bottom: 24px; right: 24px; padding: 13px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; color: #fff; z-index: 9999; transform: translateY(80px); opacity: 0; transition: all .3s; box-shadow: 0 4px 16px rgba(0,0,0,.2); }
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.success { background: var(--green); }
+.toast.error { background: var(--red); }
+
+/* NEWS TABLE */
+.news-table { width: 100%; border-collapse: collapse; }
+.news-table th { background: #f9fafb; padding: 10px 14px; text-align: left; font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; border-bottom: 1px solid var(--border); }
+.news-table td { padding: 12px 14px; border-bottom: 1px solid #f3f4f6; font-size: 13px; vertical-align: middle; }
+.news-table tr:last-child td { border-bottom: none; }
+.news-table tr:hover td { background: #fafafa; }
+.news-thumb { width: 60px; height: 44px; border-radius: 5px; object-fit: cover; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.news-title-cell { max-width: 280px; }
+.news-title-cell strong { font-family: 'Noto Serif Bengali', serif; font-size: 13px; display: block; line-height: 1.4; }
+.badge-cat { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; background: #fee2e2; color: var(--red); }
+.badge-pub { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+.badge-pub.published { background: #dcfce7; color: var(--green); }
+.badge-pub.draft { background: #fef9c3; color: #854d0e; }
+.table-actions { display: flex; gap: 6px; }
+
+/* Loading */
+.loading { text-align: center; padding: 30px; color: var(--muted); font-size: 14px; }
+.spinner { display: inline-block; width: 20px; height: 20px; border: 2.5px solid #ddd; border-top-color: var(--red); border-radius: 50%; animation: spin .7s linear infinite; margin-right: 8px; vertical-align: middle; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Section tabs */
+.section-add { display: block; }
+.section-list { display: none; }
+.section-add.hidden, .section-list.hidden { display: none; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dash-body { grid-template-columns: 1fr; }
+  .sidebar { flex-direction: row; flex-wrap: wrap; }
+  .sidebar-item { flex: 1; min-width: 80px; justify-content: center; flex-direction: column; gap: 4px; font-size: 11px; padding: 8px; }
+  .form-row { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-box">
+    <img src="https://i.imgur.com/placeholder.png" class="login-logo" id="loginLogo" onerror="this.style.display='none'">
+    <h1>এখন ত্রিপুরা</h1>
+    <p>Admin Panel — অনুগ্রহ করে login করুন</p>
+    <input type="email" id="loginEmail" placeholder="ইমেল আইডি" autocomplete="email">
+    <input type="password" id="loginPass" placeholder="পাসওয়ার্ড" autocomplete="current-password">
+    <button onclick="doLogin()">🔐 Login করুন</button>
+    <div class="login-error" id="loginError">ইমেল বা পাসওয়ার্ড ভুল!</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard" id="dashboard">
+  <!-- Top Nav -->
+  <nav class="topnav">
+    <div class="topnav-brand">
+      <img src="" id="navLogo" onerror="this.style.display='none'">
+      <div>
+        <span>এখন ত্রিপুরা</span>
+        <small>Admin Panel</small>
+      </div>
+    </div>
+    <div class="topnav-right">
+      <span id="adminEmail" style="color:#aaa;font-size:12px;"></span>
+      <button class="btn-logout" onclick="doLogout()">🚪 Logout</button>
+    </div>
+  </nav>
+
+  <div class="dash-body">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <button class="sidebar-item active" onclick="showSection('add')" id="tab-add">
+        <span class="icon">✏️</span> নিউজ লিখুন
+      </button>
+      <button class="sidebar-item" onclick="showSection('list')" id="tab-list">
+        <span class="icon">📋</span> সব নিউজ
+      </button>
+    </div>
+
+    <!-- Main -->
+    <div class="main-panel">
+
+      <!-- Stats -->
+      <div class="stats-row" id="statsRow">
+        <div class="stat-card"><div class="snum" id="statTotal">—</div><div class="slabel">মোট নিউজ</div></div>
+        <div class="stat-card"><div class="snum" id="statPublished">—</div><div class="slabel">Published</div></div>
+        <div class="stat-card"><div class="snum" id="statDraft">—</div><div class="slabel">Draft</div></div>
+      </div>
+
+      <!-- ADD NEWS PANEL -->
+      <div class="panel section-add" id="sectionAdd">
+        <div class="panel-head">
+          <h2>✏️ নতুন নিউজ লিখুন</h2>
+        </div>
+        <div class="panel-body">
+          <div class="form-row">
+            <div class="form-group full">
+              <label>শিরোনাম (Title) *</label>
+              <input type="text" id="newsTitle" placeholder="নিউজের শিরোনাম লিখুন...">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>বিভাগ (Category) *</label>
+              <select id="newsCategory">
+                <option value="">— বিভাগ বেছে নিন —</option>
+                <option value="tripura">ত্রিপুরা</option>
+                <option value="india">ভারত</option>
+                <option value="international">আন্তর্জাতিক</option>
+                <option value="politics">রাজনীতি</option>
+                <option value="sports">খেলাধুলা</option>
+                <option value="entertainment">বিনোদন</option>
+                <option value="rashi">রাশিফল</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>লেখকের নাম</label>
+              <input type="text" id="newsAuthor" placeholder="যেমন: সুমন দেবনাথ">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full">
+              <label>সংক্ষিপ্ত বিবরণ (Excerpt)</label>
+              <input type="text" id="newsExcerpt" placeholder="নিউজের সংক্ষিপ্ত বিবরণ...">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full">
+              <label>নিউজের বিস্তারিত (Full Content) *</label>
+              <textarea id="newsContent" placeholder="এখানে পুরো নিউজ লিখুন..."></textarea>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full">
+              <label>ছবির URL (Image Link)</label>
+              <input type="url" id="newsImageUrl" placeholder="https://... ছবির link paste করুন" oninput="previewImageUrl(this.value)">
+              <p style="font-size:11px;color:#6b7280;margin-top:4px;">💡 Facebook/Google Drive/যেকোনো জায়গা থেকে ছবির link copy করে paste করুন</p>
+              <img id="imgPreview" class="img-preview" style="margin-top:10px;max-height:200px;border-radius:6px;display:none;">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Status</label>
+              <select id="newsStatus">
+                <option value="published">✅ Published (সাথে সাথে দেখাবে)</option>
+                <option value="draft">📝 Draft (পরে publish করবো)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Breaking News?</label>
+              <select id="newsBreaking">
+                <option value="false">না</option>
+                <option value="true">🔴 হ্যাঁ, Breaking News</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-secondary" onclick="clearForm()">🗑️ Clear</button>
+            <button class="btn btn-primary" onclick="submitNews()" id="submitBtn">📤 নিউজ Publish করুন</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- NEWS LIST PANEL -->
+      <div class="panel section-list" id="sectionList" style="display:none;">
+        <div class="panel-head">
+          <h2>📋 সব নিউজ</h2>
+          <button class="btn btn-primary" onclick="showSection('add')" style="font-size:13px;padding:7px 14px;">+ নতুন নিউজ</button>
+        </div>
+        <div class="panel-body" style="padding:0;">
+          <div id="newsList" class="loading"><span class="spinner"></span> লোড হচ্ছে...</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, orderBy, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDilxe-j7wzHGOGhwro3ugOo94r_iIXvPI",
+    authDomain: "ekhon-tripura-c809b.firebaseapp.com",
+    projectId: "ekhon-tripura-c809b",
+    storageBucket: "ekhon-tripura-c809b.firebasestorage.app",
+    messagingSenderId: "735998815074",
+    appId: "1:735998815074:web:75c592d729e2bc30c05a3b",
+    measurementId: "G-NERCLFYW2T"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // ── Auth state ──
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      document.getElementById('loginWrap').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.getElementById('adminEmail').textContent = user.email;
+      loadStats();
+    } else {
+      document.getElementById('loginWrap').style.display = 'flex';
+      document.getElementById('dashboard').style.display = 'none';
+    }
+  });
+
+  // ── Login ──
+  window.doLogin = async function() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const pass  = document.getElementById('loginPass').value;
+    const errEl = document.getElementById('loginError');
+    errEl.style.display = 'none';
+    try {
+      await signInWithEmailAndPassword(auth, email, pass);
+    } catch(e) {
+      errEl.style.display = 'block';
+    }
+  };
+
+  // ── Logout ──
+  window.doLogout = async function() {
+    await signOut(auth);
+  };
+
+  // ── Image URL preview ──
+  window.previewImageUrl = function(url) {
+    const preview = document.getElementById('imgPreview');
+    if (url) { preview.src = url; preview.style.display = 'block'; preview.onerror = () => { preview.style.display = 'none'; }; }
+    else { preview.style.display = 'none'; }
+  };
+
+  // ── Show section ──
+  window.showSection = function(sec) {
+    document.getElementById('sectionAdd').style.display  = sec === 'add'  ? 'block' : 'none';
+    document.getElementById('sectionList').style.display = sec === 'list' ? 'block' : 'none';
+    document.getElementById('tab-add').classList.toggle('active',  sec === 'add');
+    document.getElementById('tab-list').classList.toggle('active', sec === 'list');
+    if (sec === 'list') loadNewsList();
+  };
+
+  // ── Submit news ──
+  window.submitNews = async function() {
+    const title    = document.getElementById('newsTitle').value.trim();
+    const category = document.getElementById('newsCategory').value;
+    const content  = document.getElementById('newsContent').value.trim();
+    const author   = document.getElementById('newsAuthor').value.trim();
+    const excerpt  = document.getElementById('newsExcerpt').value.trim();
+    const status   = document.getElementById('newsStatus').value;
+    const breaking = document.getElementById('newsBreaking').value === 'true';
+    const btn = document.getElementById('submitBtn');
+
+    if (!title)    { showToast('শিরোনাম লিখুন!', 'error'); return; }
+    if (!category) { showToast('বিভাগ বেছে নিন!', 'error'); return; }
+    if (!content)  { showToast('নিউজের বিস্তারিত লিখুন!', 'error'); return; }
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Uploading...';
+
+    try {
+      const imageUrl = document.getElementById('newsImageUrl').value.trim();
+
+      // Save to Firestore
+      await addDoc(collection(db, 'news'), {
+        title, category, content, author, excerpt,
+        status, breaking, imageUrl,
+        createdAt: serverTimestamp(),
+        views: 0
+      });
+
+      showToast('✅ নিউজ successfully publish হয়েছে!', 'success');
+      clearForm();
+      loadStats();
+    } catch(e) {
+      console.error(e);
+      showToast('❌ Error: ' + e.message, 'error');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '📤 নিউজ Publish করুন';
+    }
+  };
+
+  // ── Clear form ──
+  window.clearForm = function() {
+    ['newsTitle','newsCategory','newsContent','newsAuthor','newsExcerpt'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('newsStatus').value = 'published';
+    document.getElementById('newsBreaking').value = 'false';
+    document.getElementById('newsImageUrl').value = '';
+    document.getElementById('imgPreview').style.display = 'none';
+  };
+
+  // ── Load stats ──
+  window.loadStats = async function() {
+    try {
+      const snap = await getDocs(collection(db, 'news'));
+      let total = 0, published = 0, draft = 0;
+      snap.forEach(d => {
+        total++;
+        if (d.data().status === 'published') published++;
+        else draft++;
+      });
+      document.getElementById('statTotal').textContent = total;
+      document.getElementById('statPublished').textContent = published;
+      document.getElementById('statDraft').textContent = draft;
+    } catch(e) {}
+  };
+
+  // ── Load news list ──
+  window.loadNewsList = async function() {
+    const container = document.getElementById('newsList');
+    container.innerHTML = '<div class="loading"><span class="spinner"></span> লোড হচ্ছে...</div>';
+    try {
+      const q = query(collection(db, 'news'), orderBy('createdAt', 'desc'));
+      const snap = await getDocs(q);
+      if (snap.empty) {
+        container.innerHTML = '<div class="loading">কোনো নিউজ নেই। নতুন নিউজ লিখুন!</div>';
+        return;
+      }
+      const catNames = { tripura:'ত্রিপুরা', india:'ভারত', international:'আন্তর্জাতিক', politics:'রাজনীতি', sports:'খেলাধুলা', entertainment:'বিনোদন', rashi:'রাশিফল' };
+      let html = `<table class="news-table">
+        <thead><tr>
+          <th>ছবি</th><th>শিরোনাম</th><th>বিভাগ</th><th>Status</th><th>তারিখ</th><th>Action</th>
+        </tr></thead><tbody>`;
+
+      snap.forEach(docSnap => {
+        const d = docSnap.data();
+        const id = docSnap.id;
+        const date = d.createdAt ? new Date(d.createdAt.seconds*1000).toLocaleDateString('bn-BD') : '—';
+        const thumb = d.imageUrl
+          ? `<img src="${d.imageUrl}" style="width:60px;height:44px;border-radius:5px;object-fit:cover;">`
+          : `<div class="news-thumb">📰</div>`;
+        html += `<tr>
+          <td>${thumb}</td>
+          <td class="news-title-cell">
+            <strong>${d.title}</strong>
+            ${d.breaking ? '<span style="color:red;font-size:11px;"> 🔴 Breaking</span>' : ''}
+          </td>
+          <td><span class="badge-cat">${catNames[d.category] || d.category}</span></td>
+          <td><span class="badge-pub ${d.status}">${d.status === 'published' ? 'Published' : 'Draft'}</span></td>
+          <td style="font-size:12px;white-space:nowrap;">${date}</td>
+          <td>
+            <div class="table-actions">
+              <button class="btn btn-danger" style="padding:5px 10px;font-size:12px;" onclick="deleteNews('${id}')">🗑️</button>
+              <button class="btn btn-success" style="padding:5px 10px;font-size:12px;" onclick="toggleStatus('${id}','${d.status}')">${d.status === 'published' ? '📝 Draft' : '✅ Publish'}</button>
+            </div>
+          </td>
+        </tr>`;
+      });
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    } catch(e) {
+      container.innerHTML = '<div class="loading">Error loading news: ' + e.message + '</div>';
+    }
+  };
+
+  // ── Delete news ──
+  window.deleteNews = async function(id) {
+    if (!confirm('এই নিউজটি delete করবেন?')) return;
+    try {
+      await deleteDoc(doc(db, 'news', id));
+      showToast('নিউজ delete হয়েছে', 'success');
+      loadNewsList(); loadStats();
+    } catch(e) { showToast('Error: '+e.message, 'error'); }
+  };
+
+  // ── Toggle status ──
+  window.toggleStatus = async function(id, current) {
+    const newStatus = current === 'published' ? 'draft' : 'published';
+    try {
+      await updateDoc(doc(db, 'news', id), { status: newStatus });
+      showToast('Status update হয়েছে!', 'success');
+      loadNewsList(); loadStats();
+    } catch(e) { showToast('Error: '+e.message, 'error'); }
+  };
+
+  // ── Toast ──
+  window.showToast = function(msg, type='success') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast ' + type + ' show';
+    setTimeout(() => { t.className = 'toast ' + type; }, 3500);
+  };
+
+  // Enter key login
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && document.getElementById('loginWrap').style.display !== 'none') doLogin();
+  });
+</script>
+</body>
+</html>
