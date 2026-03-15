@@ -46,7 +46,7 @@ button{cursor:pointer;font-family:inherit;}
 .s-fb{background:#1877f2;}.s-wa{background:#25d366;}.s-yt{background:#f00;}
 
 /* NAVBAR */
-.navbar{background:var(--red);box-shadow:0 2px 6px rgba(0,0,0,.15);position:sticky;top:0;z-index:1000;}
+.navbar{background:var(--red);box-shadow:0 2px 6px rgba(0,0,0,.15);position:relative;}
 .nav-wrap{max-width:1200px;margin:auto;padding:0 16px;display:flex;align-items:center;}
 .nav-links{display:flex;align-items:center;flex:1;overflow-x:auto;}
 .nav-links::-webkit-scrollbar{height:0;}
@@ -58,14 +58,14 @@ button{cursor:pointer;font-family:inherit;}
 .ham-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .ham-btn.open span:nth-child(2){opacity:0;transform:scaleX(0);}
 .ham-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.mob-nav{display:none;flex-direction:column;background:#a82a1e;position:absolute;top:100%;left:0;right:0;z-index:1101;max-height:0;overflow:hidden;transition:max-height .32s ease;box-shadow:0 10px 25px rgba(0,0,0,.5);}
+.mob-nav{display:none;flex-direction:column;background:#a82a1e;position:absolute;top:100%;left:0;right:0;z-index:1100;max-height:0;overflow:hidden;transition:max-height .32s ease;box-shadow:0 8px 20px rgba(0,0,0,.22);}
 .mob-nav.open{max-height:520px;}
 .mob-nav a{color:#fff;padding:12px 20px;font-size:14px;font-weight:600;border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:9px;}
 
 /* TICKER */
 .ticker-bar{background:#1a1a1a;display:flex;align-items:center;overflow:hidden;border-bottom:1px solid #2a2a2a;}
 .ticker-label{background:var(--red);color:#fff;padding:7px 14px;font-size:11px;font-weight:700;letter-spacing:1px;white-space:nowrap;flex-shrink:0;}
-.ticker-scroll{flex:1;overflow:hidden;width:100%;}
+.ticker-scroll{flex:1;overflow:hidden;}
 .ticker-track{display:inline-flex;white-space:nowrap;animation:tickerMove 40s linear infinite;}
 .ticker-track:hover{animation-play-state:paused;}
 .ticker-track span{color:#ddd;font-size:13px;padding:7px 36px;border-right:1px solid #333;}
