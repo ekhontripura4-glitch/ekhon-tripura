@@ -451,6 +451,7 @@ button { cursor: pointer; font-family: inherit; }
     <!-- SIDEBAR -->
     <aside class="sidebar">
 
+      <!-- Weather -->
       <div class="weather-box">
         <div class="wc">🌍 আগরতলা, ত্রিপুরা</div>
         <div class="wt">২৮°</div>
@@ -462,17 +463,13 @@ button { cursor: pointer; font-family: inherit; }
         </div>
       </div>
 
-      <div class="widget">
+      <!-- Trending - Firebase থেকে real data -->
+      <div class="widget" id="trendingWidget" style="display:none;">
         <div class="whead">🔥 ট্রেন্ডিং</div>
-        <div class="wbody">
-          <div class="trend-item"><div class="tnum">১</div><div><h5>ভারত-বাংলা সীমান্তে দালাল চক্রের নড়াচড়া, দুইজন আটক</h5><div class="tm">📅 ১০ মার্চ ২০২৬</div></div></div>
-          <div class="trend-item"><div class="tnum">২</div><div><h5>মুর্মুকে পালটা মমতা — BJP নিয়ে তীব্র বিস্ফোরণ</h5><div class="tm">📅 ৭ মার্চ ২০২৬</div></div></div>
-          <div class="trend-item"><div class="tnum">৩</div><div><h5>তেলিয়ামুড়ায় অসহায় ছাত্র অনির্বাণের পাশে বিধায়িকা</h5><div class="tm">📅 ৭ মার্চ ২০২৬</div></div></div>
-          <div class="trend-item"><div class="tnum">৪</div><div><h5>উপ-রাষ্ট্রপতি রাধাকৃষ্ণাণের দু'দিনের রাজ্য সফর</h5><div class="tm">📅 ৭ মার্চ ২০২৬</div></div></div>
-          <div class="trend-item"><div class="tnum">৫</div><div><h5>পাহাড়ে জয়ের লক্ষ্যে বিজেপির সাংগঠনিক বৈঠক</h5><div class="tm">📅 ৭ মার্চ ২০২৬</div></div></div>
-        </div>
+        <div class="wbody" id="trendingList"></div>
       </div>
 
+      <!-- Ad -->
       <div class="ad-box">
         <p>বিজ্ঞাপনের জন্য যোগাযোগ করুন</p>
         <h3>📢 আপনার বিজ্ঞাপন দিন</h3>
@@ -480,22 +477,20 @@ button { cursor: pointer; font-family: inherit; }
         <a href="https://wa.me/918787391790" target="_blank" rel="noopener">💬 WhatsApp করুন</a>
       </div>
 
-      <div class="widget">
+      <!-- সর্বশেষ খবর - Firebase থেকে real data -->
+      <div class="widget" id="latestWidget" style="display:none;">
         <div class="whead">📰 সর্বশেষ খবর</div>
-        <div class="wbody">
-          <div class="sw-item"><div class="sth"><div class="ph ph-6">🏛️</div></div><div><h5>শনিপূজাকে কেন্দ্র করে সংঘর্ষ — মামলা-পাল্টা মামলায় চাঞ্চল্য</h5><div class="sm">৯ মার্চ ২০২৬</div></div></div>
-          <div class="sw-item"><div class="sth"><div class="ph ph-1">📰</div></div><div><h5>হরমুজ প্রণালী ইস্যুতে নড়েচড়ে বসলো দিল্লি</h5><div class="sm">৮ মার্চ ২০২৬</div></div></div>
-          <div class="sw-item"><div class="sth"><div class="ph ph-3">👁️</div></div><div><h5>খবর প্রকাশের পর অনির্বাণের পাশে দুই সামাজিক সংস্থা</h5><div class="sm">৮ মার্চ ২০২৬</div></div></div>
-        </div>
+        <div class="wbody" id="latestList"></div>
       </div>
 
+      <!-- Follow -->
       <div class="widget">
         <div class="whead">📲 আমাদের অনুসরণ করুন</div>
         <div class="wbody">
           <div class="follow-links">
             <a href="https://facebook.com/share/1buQiZUsW5/" class="fl-fb" target="_blank" rel="noopener"><span style="font-weight:900;font-size:16px;">f</span> Facebook-এ Like করুন</a>
             <a href="https://wa.me/918787391790" class="fl-wa" target="_blank" rel="noopener"><span>💬</span> WhatsApp-এ যোগ দিন</a>
-            <a href="/cdn-cgi/l/email-protection#c2a7a9aaadacb6b0abb2b7b0a382a5afa3abaeeca1adaf" class="fl-em"><span>✉️</span> <span class="__cf_email__" data-cfemail="ef8a848780819b9d869f9a9d8eaf88828e8683c18c8082">[email&#160;protected]</span></a>
+            <a href="mailto:ekhontripura@gmail.com" class="fl-em"><span>✉️</span> ekhontripura@gmail.com</a>
           </div>
         </div>
       </div>
@@ -843,6 +838,66 @@ button { cursor: pointer; font-family: inherit; }
       if(ticker && docs.length > 0) {
         const items = docs.slice(0,7).map(d => `<span>${d.data().title}</span>`).join('');
         ticker.innerHTML = items + items;
+      }
+
+      // Update trending sidebar
+      const trendingWidget = document.getElementById('trendingWidget');
+      const trendingList = document.getElementById('trendingList');
+      if(trendingList && docs.length > 0) {
+        const bnNums = ['১','২','৩','৪','৫'];
+        trendingList.innerHTML = docs.slice(0,5).map((d,i) => {
+          const data = d.data();
+          return `<div class="trend-item" style="cursor:pointer;" data-newskey="trend_${i}">
+            <div class="tnum">${bnNums[i]||i+1}</div>
+            <div>
+              <h5>${data.title}</h5>
+              <div class="tm">📅 ${timeAgo(data.createdAt)}</div>
+            </div>
+          </div>`;
+        }).join('');
+        // Store data and add click handlers
+        docs.slice(0,5).forEach(function(d,i){
+          window._newsStore['trend_'+i] = {
+            title: d.data().title, category: d.data().category,
+            content: d.data().content, author: d.data().author,
+            date: timeAgo(d.data().createdAt), imageUrl: d.data().imageUrl||''
+          };
+        });
+        trendingList.querySelectorAll('.trend-item').forEach(function(el){
+          el.addEventListener('click', function(){
+            openNewsModal(window._newsStore[this.dataset.newskey]);
+          });
+        });
+        if(trendingWidget) trendingWidget.style.display = 'block';
+      }
+
+      // Update latest news sidebar
+      const latestWidget = document.getElementById('latestWidget');
+      const latestList = document.getElementById('latestList');
+      if(latestList && docs.length > 0) {
+        latestList.innerHTML = docs.slice(0,4).map((d,i) => {
+          const data = d.data();
+          const img = data.imageUrl
+            ? `<img src="${data.imageUrl}" style="width:100%;height:100%;object-fit:cover;">`
+            : `<div class="ph ph-1" style="height:54px;font-size:18px;">📰</div>`;
+          return `<div class="sw-item" style="cursor:pointer;" data-newskey="latest_${i}">
+            <div class="sth" style="overflow:hidden;">${img}</div>
+            <div><h5>${data.title}</h5><div class="sm">📅 ${timeAgo(data.createdAt)}</div></div>
+          </div>`;
+        }).join('');
+        docs.slice(0,4).forEach(function(d,i){
+          window._newsStore['latest_'+i] = {
+            title: d.data().title, category: d.data().category,
+            content: d.data().content, author: d.data().author,
+            date: timeAgo(d.data().createdAt), imageUrl: d.data().imageUrl||''
+          };
+        });
+        latestList.querySelectorAll('.sw-item').forEach(function(el){
+          el.addEventListener('click', function(){
+            openNewsModal(window._newsStore[this.dataset.newskey]);
+          });
+        });
+        if(latestWidget) latestWidget.style.display = 'block';
       }
 
     } catch(e) {
