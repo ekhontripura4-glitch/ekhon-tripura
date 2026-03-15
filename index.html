@@ -221,6 +221,24 @@ img{display:block;max-width:100%;}
 .footer-grid{grid-template-columns:1fr;}
 .hero-cap h2{font-size:16px;}
 }
+
+/* ADVERTISEMENT */
+.ad-banner-top{width:100%;margin:12px 0;border-radius:8px;overflow:hidden;box-shadow:var(--shadow);}
+.ad-banner-top img{width:100%;height:auto;display:block;}
+.ad-banner-top .ad-placeholder{background:linear-gradient(135deg,#f39c12,#e67e22);padding:18px;text-align:center;color:#fff;border-radius:8px;font-size:13px;font-weight:600;}
+.ad-banner-top .ad-placeholder span{font-size:11px;opacity:.8;display:block;margin-top:4px;}
+.ad-between{margin:16px 0;border-radius:8px;overflow:hidden;box-shadow:var(--shadow);}
+.ad-between .ad-placeholder{background:linear-gradient(135deg,#2c3e50,#3498db);padding:16px;text-align:center;color:#fff;border-radius:8px;font-size:13px;font-weight:600;}
+
+/* SHARE BUTTONS */
+.share-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;color:#fff;cursor:pointer;border:none;transition:opacity .2s;margin-top:8px;margin-right:6px;font-family:"Hind Siliguri",sans-serif;}
+.share-btn:hover{opacity:.88;}
+.share-fb{background:#1877f2;}
+.share-wa{background:#25d366;}
+.share-tw{background:#1da1f2;}
+.share-copy{background:#555;}
+.share-wrap{padding:14px 22px;border-top:1px solid var(--border);background:#fafafa;}
+.share-wrap p{font-size:12px;color:var(--muted);margin-bottom:6px;}
 </style>
 </head>
 <body>
@@ -300,6 +318,15 @@ img{display:block;max-width:100%;}
   </div>
 </div>
 
+<!-- TOP ADVERTISEMENT BANNER -->
+<div class="container">
+  <div id="topAdBanner" style="margin:12px 0;border-radius:8px;overflow:hidden;display:none;">
+    <a id="topAdLink" href="#" target="_blank" rel="noopener">
+      <img id="topAdImg" src="" alt="বিজ্ঞাপন" style="width:100%;height:auto;display:block;">
+    </a>
+  </div>
+</div>
+
 <div class="container">
   <div class="page-grid">
     <main>
@@ -307,29 +334,19 @@ img{display:block;max-width:100%;}
         <div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:#777;"><div style="font-size:30px;margin-bottom:10px;">⏳</div><div>নিউজ লোড হচ্ছে...</div></div>
       </div>
       <div class="sec-wrap" id="sec-tripura" style="display:none;"><div class="sec-head"><h2>ত্রিপুরা</h2><a href="#" class="see-all">সব দেখুন →</a></div><div class="grid-3" id="grid-tripura"></div></div>
+      <!-- MIDDLE ADVERTISEMENT BANNER -->
+      <div id="midAdBanner" style="margin:16px 0;border-radius:8px;overflow:hidden;display:none;">
+        <a id="midAdLink" href="#" target="_blank" rel="noopener">
+          <img id="midAdImg" src="" alt="বিজ্ঞাপন" style="width:100%;height:auto;display:block;">
+        </a>
+      </div>
+
       <div class="sec-wrap" id="sec-india" style="display:none;"><div class="sec-head"><h2>ভারত</h2><a href="#" class="see-all">সব দেখুন →</a></div><div class="grid-2" id="grid-india"></div></div>
       <div class="sec-wrap" id="sec-politics" style="display:none;"><div class="sec-head"><h2>রাজনীতি</h2><a href="#" class="see-all">সব দেখুন →</a></div><div class="grid-3" id="grid-politics"></div></div>
       <div class="sec-wrap" id="sec-sports" style="display:none;"><div class="sec-head"><h2>খেলাধুলা</h2><a href="#" class="see-all">সব দেখুন →</a></div><div class="grid-3" id="grid-sports"></div></div>
       <div class="sec-wrap" id="sec-entertainment" style="display:none;"><div class="sec-head"><h2>বিনোদন</h2><a href="#" class="see-all">সব দেখুন →</a></div><div class="grid-3" id="grid-entertainment"></div></div>
       <div class="sec-wrap" id="sec-international" style="display:none;"><div class="sec-head"><h2>আন্তর্জাতিক</h2><a href="#" class="see-all">সব দেখুন →</a></div><div class="grid-3" id="grid-international"></div></div>
-      <div class="sec-wrap">
-        <div class="sec-head"><h2>রাশিফল</h2><a href="#" class="see-all">সব দেখুন →</a></div>
-        <div class="rashi-grid">
-          <div class="rashi-card"><div class="ri">♈</div><div class="rn">মেষ</div><div class="rd">২১ মার্চ–১৯ এপ্রিল</div></div>
-          <div class="rashi-card"><div class="ri">♉</div><div class="rn">বৃষ</div><div class="rd">২০ এপ্রিল–২০ মে</div></div>
-          <div class="rashi-card"><div class="ri">♊</div><div class="rn">মিথুন</div><div class="rd">২১ মে–২০ জুন</div></div>
-          <div class="rashi-card"><div class="ri">♋</div><div class="rn">কর্কট</div><div class="rd">২১ জুন–২২ জুলাই</div></div>
-          <div class="rashi-card"><div class="ri">♌</div><div class="rn">সিংহ</div><div class="rd">২৩ জুলাই–২২ আগস্ট</div></div>
-          <div class="rashi-card"><div class="ri">♍</div><div class="rn">কন্যা</div><div class="rd">২৩ আগস্ট–২২ সেপ্টেম্বর</div></div>
-          <div class="rashi-card"><div class="ri">♎</div><div class="rn">তুলা</div><div class="rd">২৩ সেপ্টেম্বর–২২ অক্টোবর</div></div>
-          <div class="rashi-card"><div class="ri">♏</div><div class="rn">বৃশ্চিক</div><div class="rd">২৩ অক্টোবর–২১ নভেম্বর</div></div>
-          <div class="rashi-card"><div class="ri">♐</div><div class="rn">ধনু</div><div class="rd">২২ নভেম্বর–২১ ডিসেম্বর</div></div>
-          <div class="rashi-card"><div class="ri">♑</div><div class="rn">মকর</div><div class="rd">২২ ডিসেম্বর–১৯ জানুয়ারি</div></div>
-          <div class="rashi-card"><div class="ri">♒</div><div class="rn">কুম্ভ</div><div class="rd">২০ জানুয়ারি–১৮ ফেব্রুয়ারি</div></div>
-          <div class="rashi-card"><div class="ri">♓</div><div class="rn">মীন</div><div class="rd">১৯ ফেব্রুয়ারি–২০ মার্চ</div></div>
-        </div>
-      </div>
-    </main>
+      main>
 
     <aside class="sidebar">
       <div class="weather-box">
@@ -356,7 +373,7 @@ img{display:block;max-width:100%;}
           <div class="follow-links">
             <a href="https://facebook.com/share/1buQiZUsW5/" class="fl-fb" target="_blank" rel="noopener"><span style="font-weight:900;font-size:16px;">f</span> Facebook-এ Like করুন</a>
             <a href="https://wa.me/918787391790" class="fl-wa" target="_blank" rel="noopener">💬 WhatsApp-এ যোগ দিন</a>
-            <a href="mailto:ekhontripura@gmail.com" class="fl-em">✉️ ekhontripura@gmail.com</a>
+            <a href="/cdn-cgi/l/email-protection#dcb9b7b4b3b2a8aeb5aca9aebd9cbbb1bdb5b0f2bfb3b1" class="fl-em">✉️ <span class="__cf_email__" data-cfemail="1f7a747770716b6d766f6a6d7e5f78727e7673317c7072">[email&#160;protected]</span></a>
           </div>
         </div>
       </div>
@@ -372,12 +389,12 @@ img{display:block;max-width:100%;}
       <div class="f-socials">
         <a href="https://facebook.com/share/1buQiZUsW5/" target="_blank" rel="noopener">f</a>
         <a href="https://wa.me/918787391790" target="_blank" rel="noopener">W</a>
-        <a href="mailto:ekhontripura@gmail.com">@</a>
+        <a href="/cdn-cgi/l/email-protection#cbaea0a3a4a5bfb9a2bbbeb9aa8baca6aaa2a7e5a8a4a6">@</a>
       </div>
     </div>
     <div class="footer-col"><h4>বিভাগ</h4><ul><li><a href="#">ত্রিপুরা</a></li><li><a href="#">ভারত</a></li><li><a href="#">আন্তর্জাতিক</a></li><li><a href="#">রাজনীতি</a></li><li><a href="#">খেলাধুলা</a></li><li><a href="#">বিনোদন</a></li><li><a href="#">রাশিফল</a></li></ul></div>
     <div class="footer-col"><h4>দ্রুত লিঙ্ক</h4><ul><li><a href="#">আমাদের সম্পর্কে</a></li><li><a href="#">যোগাযোগ</a></li><li><a href="#">বিজ্ঞাপন</a></li><li><a href="#">ই-পেপার</a></li><li><a href="#">গোপনীয়তা নীতি</a></li></ul></div>
-    <div class="footer-col"><h4>যোগাযোগ</h4><ul><li><a href="mailto:ekhontripura@gmail.com">📧 ekhontripura@gmail.com</a></li><li><a href="https://wa.me/918787391790">📱 +91 87873 91790</a></li><li><a href="https://facebook.com/share/1buQiZUsW5/" target="_blank" rel="noopener">💻 Facebook Page</a></li></ul></div>
+    <div class="footer-col"><h4>যোগাযোগ</h4><ul><li><a href="/cdn-cgi/l/email-protection#1e7b757671706a6c776e6b6c7f5e79737f7772307d7173">📧 <span class="__cf_email__" data-cfemail="6d0806050203191f041d181f0c2d0a000c0401430e0200">[email&#160;protected]</span></a></li><li><a href="https://wa.me/918787391790">📱 +91 87873 91790</a></li><li><a href="https://facebook.com/share/1buQiZUsW5/" target="_blank" rel="noopener">💻 Facebook Page</a></li></ul></div>
   </div>
   <div class="footer-bottom">© ২০২৬ <span>এখন ত্রিপুরা ডিজিটাল মিডিয়া</span>। সর্বস্বত্ব সংরক্ষিত।</div>
 </footer>
@@ -393,10 +410,17 @@ img{display:block;max-width:100%;}
       <div class="mmeta"><span id="modalAuthor"></span><span id="modalDate"></span></div>
       <div class="mcontent" id="modalContent"></div>
     </div>
+    <div class="share-wrap">
+      <p>📤 এই নিউজটি শেয়ার করুন:</p>
+      <button class="share-btn share-fb" onclick="shareNews('facebook')">f Facebook</button>
+      <button class="share-btn share-wa" onclick="shareNews('whatsapp')">💬 WhatsApp</button>
+      <button class="share-btn share-tw" onclick="shareNews('twitter')">𝕏 Twitter</button>
+      <button class="share-btn share-copy" onclick="shareNews('copy')">🔗 Link Copy</button>
+    </div>
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Bengali date
 var D=["রবিবার","সোমবার","মঙ্গলবার","বুধবার","বৃহস্পতিবার","শুক্রবার","শনিবার"];
 var M=["জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"];
@@ -462,11 +486,29 @@ window.NM = {
   }
 };
 document.addEventListener("keydown",function(e){if(e.key==="Escape")NM.close();});
+
+// Share function
+window.shareNews = function(platform) {
+  var title = document.getElementById("modalTitle").textContent;
+  var url = window.location.href;
+  var text = title + " - এখন ত্রিপুরা";
+  if(platform === "facebook") {
+    window.open("https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(url)+"&quote="+encodeURIComponent(text), "_blank");
+  } else if(platform === "whatsapp") {
+    window.open("https://wa.me/?text="+encodeURIComponent(text+" "+url), "_blank");
+  } else if(platform === "twitter") {
+    window.open("https://twitter.com/intent/tweet?text="+encodeURIComponent(text)+"&url="+encodeURIComponent(url), "_blank");
+  } else if(platform === "copy") {
+    navigator.clipboard.writeText(url).then(function(){
+      alert("Link copied!");
+    });
+  }
+};
 </script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, query, where, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, collection, query, where, orderBy, limit, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const app = initializeApp({
   apiKey:"AIzaSyDilxe-j7wzHGOGhwro3ugOo94r_iIXvPI",
@@ -522,6 +564,7 @@ function card(d, key, horiz) {
       const sec=document.getElementById("sec-"+cat);
       const grid=document.getElementById("grid-"+cat);
       if(sec) sec.style.display="block";
+
       if(!grid)return;
       const h=cat==="india";
       grid.innerHTML=cd.slice(0,h?4:3).map((d,i)=>card(d,`c_${cat}_${i}`,h)).join("");
@@ -538,11 +581,4 @@ function card(d, key, horiz) {
     // LATEST
     const ll=document.getElementById("latestList"),lw=document.getElementById("latestWidget");
     if(ll){
-      ll.innerHTML=docs.slice(0,4).map((d,i)=>{NM.store(`l${i}`,{...d,date:fmt(d.createdAt)});const img=d.imageUrl?`<img src="${d.imageUrl}" style="width:100%;height:100%;object-fit:cover;">`:`<div class="ph ph-1" style="height:54px;font-size:18px;">📰</div>`;return `<div class="sw-item" onclick="NM.open('l${i}')"><div class="sth">${img}</div><div><h5>${d.title}</h5><div class="sm">📅 ${fmt(d.createdAt)}</div></div></div>`;}).join("");
-      if(lw)lw.style.display="block";
-    }
-  }catch(e){console.error(e);}
-})();
-</script>
-</body>
-</html>
+      ll.innerHTML=docs.slice(0,4).map((d,i)=>{NM.store(`l${i}`,{...d,date:fmt(d.createdAt)});const img=d.imageUrl?
