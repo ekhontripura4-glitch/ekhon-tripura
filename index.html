@@ -9,16 +9,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --red:#c0392b;--red-dark:#96281b;--red-light:#e74c3c;
-  --black:#111;--white:#fff;--gold:#f39c12;
-  --bg:#f2f2f2;--border:#e0e0e0;--text:#1a1a1a;--muted:#777;
-  --shadow:0 2px 10px rgba(0,0,0,0.08);
-}
+:root{--red:#c0392b;--red-dark:#96281b;--gold:#f39c12;--black:#111;--white:#fff;--bg:#f2f2f2;--border:#e0e0e0;--text:#1a1a1a;--muted:#777;--shadow:0 2px 10px rgba(0,0,0,0.08);}
 html{scroll-behavior:smooth;}
-body{font-family:'Hind Siliguri',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.65;}
+body{font-family:"Hind Siliguri",sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.65;}
 a{text-decoration:none;color:inherit;}
 button{cursor:pointer;font-family:inherit;}
+img{display:block;max-width:100%;}
 
 /* TOPBAR */
 .topbar{background:var(--black);border-bottom:2px solid var(--red);}
@@ -26,7 +22,7 @@ button{cursor:pointer;font-family:inherit;}
 .topbar-date{color:#aaa;font-size:12px;}
 .topbar-links{display:flex;gap:16px;}
 .topbar-links a{color:#bbb;font-size:12px;transition:color .2s;}
-.topbar-links a:hover{color:var(--red-light);}
+.topbar-links a:hover{color:var(--red);}
 
 /* HEADER */
 .site-header{background:var(--white);border-bottom:3px solid var(--red);box-shadow:0 2px 10px rgba(0,0,0,.07);}
@@ -34,11 +30,11 @@ button{cursor:pointer;font-family:inherit;}
 .logo-wrap{display:flex;align-items:center;gap:11px;}
 .logo-box{width:50px;height:50px;border-radius:8px;overflow:hidden;flex-shrink:0;}
 .logo-box img{width:100%;height:100%;object-fit:cover;}
-.logo-text h1{font-family:'Noto Serif Bengali',serif;font-size:25px;font-weight:900;color:var(--red);line-height:1.1;}
+.logo-text h1{font-family:"Noto Serif Bengali",serif;font-size:25px;font-weight:900;color:var(--red);line-height:1.1;}
 .logo-text p{font-size:11px;color:var(--muted);}
 .header-right{display:flex;align-items:center;gap:10px;}
 .search-form{display:flex;align-items:center;border:1.5px solid var(--border);border-radius:24px;overflow:hidden;background:#f5f5f5;}
-.search-form input{border:none;background:transparent;padding:7px 13px;font-family:'Hind Siliguri',sans-serif;font-size:13px;outline:none;width:170px;}
+.search-form input{border:none;background:transparent;padding:7px 13px;font-family:"Hind Siliguri",sans-serif;font-size:13px;outline:none;width:170px;}
 .search-form button{background:var(--red);border:none;color:#fff;padding:7px 13px;font-size:13px;}
 .socials{display:flex;gap:7px;}
 .socials a{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;transition:transform .2s;}
@@ -46,26 +42,29 @@ button{cursor:pointer;font-family:inherit;}
 .s-fb{background:#1877f2;}.s-wa{background:#25d366;}.s-yt{background:#f00;}
 
 /* NAVBAR */
-.navbar{background:var(--red);box-shadow:0 2px 6px rgba(0,0,0,.15);position:relative;}
+.navbar{background:var(--red);box-shadow:0 2px 6px rgba(0,0,0,.15);position:sticky;top:0;z-index:1000;}
 .nav-wrap{max-width:1200px;margin:auto;padding:0 16px;display:flex;align-items:center;}
-.nav-links{display:flex;align-items:center;flex:1;overflow-x:auto;}
+.nav-links{display:flex;align-items:center;flex:1;overflow-x:auto;cursor:grab;}
 .nav-links::-webkit-scrollbar{height:0;}
+.nav-links.grabbing{cursor:grabbing;}
 .nav-links a{color:#fff;padding:11px 14px;font-size:14px;font-weight:600;white-space:nowrap;display:block;transition:background .2s;border-bottom:3px solid transparent;}
 .nav-links a:hover{background:rgba(0,0,0,.18);}
 .nav-links a.active{background:rgba(0,0,0,.2);border-bottom-color:var(--gold);}
-.ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:10px 0 10px 14px;flex-shrink:0;}
+.nav-arr{background:rgba(0,0,0,.3);border:none;color:#fff;width:28px;padding:11px 0;font-size:15px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.nav-arr:hover{background:rgba(0,0,0,.5);}
+.ham-btn{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:10px 0 10px 12px;flex-shrink:0;}
 .ham-btn span{display:block;width:23px;height:2px;background:#fff;border-radius:2px;transition:all .28s ease;}
 .ham-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .ham-btn.open span:nth-child(2){opacity:0;transform:scaleX(0);}
 .ham-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.mob-nav{display:none;flex-direction:column;background:#a82a1e;position:absolute;top:100%;left:0;right:0;z-index:1100;max-height:0;overflow:hidden;transition:max-height .32s ease;box-shadow:0 8px 20px rgba(0,0,0,.22);}
+.mob-nav{display:none;flex-direction:column;background:#a82a1e;position:absolute;top:100%;left:0;right:0;z-index:1001;max-height:0;overflow:hidden;transition:max-height .32s ease;box-shadow:0 10px 25px rgba(0,0,0,.5);}
 .mob-nav.open{max-height:520px;}
 .mob-nav a{color:#fff;padding:12px 20px;font-size:14px;font-weight:600;border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:9px;}
 
 /* TICKER */
 .ticker-bar{background:#1a1a1a;display:flex;align-items:center;overflow:hidden;border-bottom:1px solid #2a2a2a;}
 .ticker-label{background:var(--red);color:#fff;padding:7px 14px;font-size:11px;font-weight:700;letter-spacing:1px;white-space:nowrap;flex-shrink:0;}
-.ticker-scroll{flex:1;overflow:hidden;}
+.ticker-scroll{flex:1;overflow:hidden;width:100%;}
 .ticker-track{display:inline-flex;white-space:nowrap;animation:tickerMove 40s linear infinite;}
 .ticker-track:hover{animation-play-state:paused;}
 .ticker-track span{color:#ddd;font-size:13px;padding:7px 36px;border-right:1px solid #333;}
@@ -75,39 +74,38 @@ button{cursor:pointer;font-family:inherit;}
 .container{max-width:1200px;margin:auto;padding:0 16px;}
 .page-grid{display:grid;grid-template-columns:1fr 296px;gap:20px;padding:20px 0 30px;}
 
-/* SECTION */
+/* SECTIONS */
 .sec-head{display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--red);padding-bottom:8px;margin-bottom:16px;}
-.sec-head h2{font-family:'Noto Serif Bengali',serif;font-size:19px;font-weight:800;color:var(--black);display:flex;align-items:center;gap:8px;}
-.sec-head h2::before{content:'';width:4px;height:20px;background:var(--red);border-radius:2px;display:inline-block;}
-.sec-head .see-all{font-size:12px;color:var(--red);font-weight:600;border:1.5px solid var(--red);padding:3px 10px;border-radius:3px;transition:all .2s;}
-.sec-head .see-all:hover{background:var(--red);color:#fff;}
+.sec-head h2{font-family:"Noto Serif Bengali",serif;font-size:19px;font-weight:800;color:var(--black);display:flex;align-items:center;gap:8px;}
+.sec-head h2::before{content:"";width:4px;height:20px;background:var(--red);border-radius:2px;display:inline-block;}
+.see-all{font-size:12px;color:var(--red);font-weight:600;border:1.5px solid var(--red);padding:3px 10px;border-radius:3px;transition:all .2s;}
+.see-all:hover{background:var(--red);color:#fff;}
 .sec-wrap{margin-bottom:26px;}
 
 /* BADGE */
 .badge{display:inline-block;padding:2px 9px;border-radius:3px;font-size:10px;font-weight:800;letter-spacing:.4px;margin-bottom:5px;}
 .b-red{background:var(--red);color:#fff;}
-.b-break{background:var(--red);color:#fff;animation:blinkPulse 1.4s infinite;}
-@keyframes blinkPulse{0%,100%{opacity:1}50%{opacity:.5}}
+.b-break{background:var(--red);color:#fff;animation:blink 1.4s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
 
 /* HERO */
 .hero-grid{display:grid;grid-template-columns:1.55fr 1fr;grid-template-rows:1fr 1fr;gap:10px;margin-bottom:24px;}
-.hero-main{grid-row:1/3;border-radius:7px;overflow:hidden;position:relative;box-shadow:var(--shadow);cursor:pointer;background:#c0392b;}
+.hero-main{grid-row:1/3;border-radius:7px;overflow:hidden;position:relative;box-shadow:var(--shadow);cursor:pointer;}
 .hero-main .himg{height:370px;overflow:hidden;}
-.hero-side{border-radius:7px;overflow:hidden;position:relative;box-shadow:var(--shadow);cursor:pointer;background:#2980b9;}
+.hero-side{border-radius:7px;overflow:hidden;position:relative;box-shadow:var(--shadow);cursor:pointer;}
 .hero-side .himg{height:100%;min-height:178px;overflow:hidden;}
-.ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:38px;transition:transform .38s ease;}
+.ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:38px;}
 .ph-1{background:linear-gradient(135deg,#c0392b,#7b241c);}
 .ph-2{background:linear-gradient(135deg,#2980b9,#1a5276);}
 .ph-3{background:linear-gradient(135deg,#27ae60,#1e8449);}
 .ph-4{background:linear-gradient(135deg,#8e44ad,#6c3483);}
 .ph-5{background:linear-gradient(135deg,#d35400,#a04000);}
 .ph-6{background:linear-gradient(135deg,#16a085,#0e6655);}
-.hero-main:hover .ph,.hero-side:hover .ph{transform:scale(1.04);}
 .hero-cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.86));padding:28px 16px 16px;}
-.hero-cap h2{font-family:'Noto Serif Bengali',serif;font-size:19px;font-weight:800;color:#fff;line-height:1.45;margin-bottom:6px;}
+.hero-cap h2{font-family:"Noto Serif Bengali",serif;font-size:19px;font-weight:800;color:#fff;line-height:1.45;margin-bottom:6px;}
 .hero-cap .meta{color:#ccc;font-size:12px;}
 .hs-cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.82));padding:20px 13px 12px;}
-.hs-cap h3{font-family:'Noto Serif Bengali',serif;font-size:14px;font-weight:700;color:#fff;line-height:1.4;}
+.hs-cap h3{font-family:"Noto Serif Bengali",serif;font-size:14px;font-weight:700;color:#fff;line-height:1.4;}
 
 /* CARDS */
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
@@ -115,31 +113,30 @@ button{cursor:pointer;font-family:inherit;}
 .card{background:#fff;border-radius:7px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:box-shadow .22s,transform .22s;display:flex;flex-direction:column;}
 .card:hover{box-shadow:0 6px 22px rgba(0,0,0,.13);transform:translateY(-2px);}
 .card .cimg{height:175px;overflow:hidden;flex-shrink:0;}
-.card .cimg .ph{height:100%;}
-.card:hover .cimg .ph{transform:scale(1.04);}
 .card .cimg img{width:100%;height:100%;object-fit:cover;}
-.card-body{padding:12px 14px 14px;flex:1;display:flex;flex-direction:column;gap:6px;}
-.card-body h3{font-family:'Noto Serif Bengali',serif;font-size:14.5px;font-weight:700;color:var(--black);line-height:1.5;flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;transition:color .2s;}
+.card .cimg .ph{height:100%;}
 .card:hover .card-body h3{color:var(--red);}
+.card-body{padding:12px 14px 14px;flex:1;display:flex;flex-direction:column;gap:6px;}
+.card-body h3{font-family:"Noto Serif Bengali",serif;font-size:14.5px;font-weight:700;color:var(--black);line-height:1.5;flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;transition:color .2s;}
 .card-body p{font-size:12.5px;color:var(--muted);line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .cmeta{font-size:11px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;margin-top:auto;}
 .card-h{flex-direction:row;}
-.card-h .cimg{width:130px;min-width:130px;height:auto;min-height:120px;}
-.card-h .cimg .ph{height:100%;min-height:120px;}
+.card-h .cimg{width:130px;min-width:130px;height:auto;}
 .card-h .cimg img{height:100%;min-height:120px;}
+.card-h .cimg .ph{height:100%;min-height:120px;}
 
 /* RASHI */
 .rashi-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;}
 .rashi-card{background:#fff;border-radius:8px;padding:13px 6px;text-align:center;box-shadow:var(--shadow);cursor:pointer;transition:transform .2s;border-top:3px solid transparent;}
 .rashi-card:hover{transform:translateY(-2px);border-top-color:var(--red);}
 .rashi-card .ri{font-size:24px;margin-bottom:4px;}
-.rashi-card .rn{font-family:'Noto Serif Bengali',serif;font-size:12.5px;font-weight:700;}
+.rashi-card .rn{font-family:"Noto Serif Bengali",serif;font-size:12.5px;font-weight:700;}
 .rashi-card .rd{font-size:9.5px;color:var(--muted);margin-top:2px;}
 
 /* SIDEBAR */
 .sidebar{display:flex;flex-direction:column;gap:18px;}
 .widget{background:#fff;border-radius:7px;overflow:hidden;box-shadow:var(--shadow);}
-.whead{background:var(--red);color:#fff;padding:9px 15px;font-family:'Noto Serif Bengali',serif;font-size:14px;font-weight:700;display:flex;align-items:center;gap:7px;}
+.whead{background:var(--red);color:#fff;padding:9px 15px;font-family:"Noto Serif Bengali",serif;font-size:14px;font-weight:700;}
 .wbody{padding:13px 14px;}
 .weather-box{background:linear-gradient(135deg,#1565c0,#0d47a1);border-radius:7px;padding:18px;text-align:center;box-shadow:var(--shadow);color:#fff;}
 .weather-box .wc{font-size:12px;opacity:.8;margin-bottom:2px;}
@@ -150,8 +147,9 @@ button{cursor:pointer;font-family:inherit;}
 .wdet strong{display:block;font-size:14px;}
 .trend-item{display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed var(--border);cursor:pointer;}
 .trend-item:last-child{border-bottom:none;padding-bottom:0;}
-.tnum{font-size:22px;font-weight:900;color:var(--red);opacity:.22;width:22px;flex-shrink:0;line-height:1;font-family:'Noto Serif Bengali',serif;}
-.trend-item h5{font-family:'Noto Serif Bengali',serif;font-size:13px;font-weight:700;color:var(--black);line-height:1.4;transition:color .2s;}
+.tnum{font-size:22px;font-weight:900;color:var(--red);opacity:.22;width:22px;flex-shrink:0;line-height:1;font-family:"Noto Serif Bengali",serif;}
+.trend-item:hover .tnum{opacity:.6;}
+.trend-item h5{font-family:"Noto Serif Bengali",serif;font-size:13px;font-weight:700;color:var(--black);line-height:1.4;}
 .trend-item:hover h5{color:var(--red);}
 .trend-item .tm{font-size:11px;color:var(--muted);margin-top:3px;}
 .ad-box{background:linear-gradient(135deg,#263238,#37474f);border-radius:7px;padding:20px;text-align:center;color:#fff;box-shadow:var(--shadow);}
@@ -162,95 +160,71 @@ button{cursor:pointer;font-family:inherit;}
 .sw-item:last-child{border-bottom:none;padding-bottom:0;}
 .sw-item:hover{opacity:.78;}
 .sw-item .sth{width:70px;height:54px;border-radius:4px;overflow:hidden;flex-shrink:0;}
-.sw-item .sth .ph{height:100%;font-size:20px;}
 .sw-item .sth img{width:100%;height:100%;object-fit:cover;}
-.sw-item h5{font-family:'Noto Serif Bengali',serif;font-size:12px;font-weight:700;color:var(--black);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.sw-item .sth .ph{height:100%;font-size:20px;}
+.sw-item h5{font-family:"Noto Serif Bengali",serif;font-size:12px;font-weight:700;color:var(--black);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .sw-item .sm{font-size:10.5px;color:var(--muted);margin-top:3px;}
 .follow-links{display:flex;flex-direction:column;gap:9px;}
-.follow-links a{display:flex;align-items:center;gap:9px;padding:9px 14px;border-radius:6px;font-size:13px;font-weight:600;color:#fff;transition:opacity .2s;}
-.follow-links a:hover{opacity:.88;}
+.follow-links a{display:flex;align-items:center;gap:9px;padding:9px 14px;border-radius:6px;font-size:13px;font-weight:600;color:#fff;}
 .fl-fb{background:#1877f2;}.fl-wa{background:#25d366;}.fl-em{background:#ea4335;}
 
 /* FOOTER */
 .site-footer{background:#111;color:#bbb;margin-top:16px;}
 .footer-grid{max-width:1200px;margin:auto;padding:32px 16px;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:28px;}
-.fa-name{font-family:'Noto Serif Bengali',serif;font-size:21px;font-weight:900;color:#fff;margin-bottom:10px;}
+.fa-name{font-family:"Noto Serif Bengali",serif;font-size:21px;font-weight:900;color:#fff;margin-bottom:10px;}
 .footer-about p{font-size:13px;color:#888;line-height:1.7;margin-bottom:14px;}
 .f-socials{display:flex;gap:9px;}
 .f-socials a{width:34px;height:34px;border-radius:50%;background:#2a2a2a;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;transition:background .2s;}
 .f-socials a:hover{background:var(--red);}
-.footer-col h4{color:#fff;font-family:'Noto Serif Bengali',serif;font-size:14px;margin-bottom:13px;padding-bottom:7px;border-bottom:2px solid var(--red);display:inline-block;}
+.footer-col h4{color:#fff;font-family:"Noto Serif Bengali",serif;font-size:14px;margin-bottom:13px;padding-bottom:7px;border-bottom:2px solid var(--red);display:inline-block;}
 .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
-.footer-col ul li a{color:#888;font-size:12.5px;transition:color .2s;}
-.footer-col ul li a::before{content:'›';margin-right:6px;color:var(--red);}
-.footer-col ul li a:hover{color:var(--red-light);}
+.footer-col ul li a{color:#888;font-size:12.5px;}
+.footer-col ul li a::before{content:"›";margin-right:6px;color:var(--red);}
+.footer-col ul li a:hover{color:var(--red);}
 .footer-bottom{background:#0a0a0a;text-align:center;padding:13px 16px;font-size:12px;color:#555;border-top:1px solid #222;}
-.footer-bottom span{color:var(--red-light);}
+.footer-bottom span{color:#e74c3c;}
 
-/* NAV ARROWS */
-.nav-arrow{background:rgba(0,0,0,.3);border:none;color:#fff;width:30px;padding:11px 0;font-size:15px;cursor:pointer;flex-shrink:0;transition:background .2s;display:flex;align-items:center;justify-content:center;}
-.nav-arrow:hover{background:rgba(0,0,0,.5);}
-
-/* NEWS MODAL */
-#newsModal{
-  display:none;
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  background:rgba(0,0,0,0.8);z-index:9999;
-  overflow-y:scroll;-webkit-overflow-scrolling:touch;
-}
-#newsModal.active{display:block !important;}
-.modal-box{
-  background:#fff;border-radius:10px;max-width:760px;width:92%;
-  margin:30px auto 60px;overflow:hidden;
-  box-shadow:0 20px 60px rgba(0,0,0,.4);
-}
-.modal-close-btn{
-  width:100%;background:var(--red);color:#fff;border:none;
-  padding:13px;font-size:14px;font-weight:700;cursor:pointer;
-  font-family:'Hind Siliguri',sans-serif;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-}
-.modal-close-btn:hover{background:var(--red-dark);}
+/* MODAL */
+#newsModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.82);z-index:9999;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.modal-box{background:#fff;border-radius:10px;max-width:760px;width:92%;margin:30px auto 60px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4);}
+.mcbtn{width:100%;background:var(--red);color:#fff;border:none;padding:13px;font-size:14px;font-weight:700;cursor:pointer;font-family:"Hind Siliguri",sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;}
+.mcbtn:hover{background:var(--red-dark);}
 #modalImg{width:100%;max-height:340px;object-fit:cover;display:none;}
-.modal-body{padding:22px;}
-.modal-cat{display:inline-block;background:var(--red);color:#fff;font-size:11px;font-weight:800;padding:3px 10px;border-radius:3px;margin-bottom:10px;}
-.modal-title{font-family:'Noto Serif Bengali',serif;font-size:21px;font-weight:900;color:var(--black);line-height:1.45;margin-bottom:10px;}
-.modal-meta{font-size:12px;color:var(--muted);margin-bottom:16px;display:flex;gap:14px;flex-wrap:wrap;}
-.modal-content{font-size:15px;line-height:1.9;color:#2a2a2a;white-space:pre-wrap;}
-
-/* LOADING */
-.news-loading{text-align:center;padding:60px 20px;color:var(--muted);}
+.mbody{padding:22px;}
+.mcat{display:inline-block;background:var(--red);color:#fff;font-size:11px;font-weight:800;padding:3px 10px;border-radius:3px;margin-bottom:10px;}
+.mtitle{font-family:"Noto Serif Bengali",serif;font-size:21px;font-weight:900;color:var(--black);line-height:1.45;margin-bottom:10px;}
+.mmeta{font-size:12px;color:var(--muted);margin-bottom:16px;display:flex;gap:14px;flex-wrap:wrap;}
+.mcontent{font-size:15px;line-height:1.9;color:#2a2a2a;white-space:pre-wrap;}
 
 /* RESPONSIVE */
 @media(max-width:960px){
-  .page-grid{grid-template-columns:1fr;}
-  .hero-grid{grid-template-columns:1fr;}
-  .hero-main{grid-row:auto;}
-  .hero-main .himg{height:260px;}
-  .grid-3{grid-template-columns:repeat(2,1fr);}
-  .rashi-grid{grid-template-columns:repeat(4,1fr);}
-  .footer-grid{grid-template-columns:1fr 1fr;}
+.page-grid{grid-template-columns:1fr;}
+.hero-grid{grid-template-columns:1fr;}
+.hero-main{grid-row:auto;}
+.hero-main .himg{height:260px;}
+.grid-3{grid-template-columns:repeat(2,1fr);}
+.rashi-grid{grid-template-columns:repeat(4,1fr);}
+.footer-grid{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:640px){
-  .topbar-links{display:none;}
-  .logo-text h1{font-size:20px;}
-  .search-form input{width:110px;}
-  .socials{display:none;}
-  .ham-btn{display:flex;}
-  .mob-nav{display:flex;}
-  .grid-3{grid-template-columns:1fr;}
-  .grid-2{grid-template-columns:1fr;}
-  .card-h{flex-direction:column;}
-  .card-h .cimg{width:100%;height:175px;min-height:175px;}
-  .rashi-grid{grid-template-columns:repeat(3,1fr);}
-  .footer-grid{grid-template-columns:1fr;}
-  .hero-cap h2{font-size:16px;}
+.topbar-links{display:none;}
+.logo-text h1{font-size:20px;}
+.search-form input{width:110px;}
+.socials{display:none;}
+.ham-btn{display:flex;}
+.mob-nav{display:flex;}
+.grid-3{grid-template-columns:1fr;}
+.grid-2{grid-template-columns:1fr;}
+.card-h{flex-direction:column;}
+.card-h .cimg{width:100%;height:175px;}
+.rashi-grid{grid-template-columns:repeat(3,1fr);}
+.footer-grid{grid-template-columns:1fr;}
+.hero-cap h2{font-size:16px;}
 }
 </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
 <div class="topbar">
   <div class="topbar-inner">
     <span class="topbar-date" id="topDate"></span>
@@ -263,7 +237,6 @@ button{cursor:pointer;font-family:inherit;}
   </div>
 </div>
 
-<!-- HEADER -->
 <header class="site-header">
   <div class="header-inner">
     <div class="logo-wrap">
@@ -287,10 +260,9 @@ button{cursor:pointer;font-family:inherit;}
   </div>
 </header>
 
-<!-- NAVBAR -->
 <nav class="navbar">
   <div class="nav-wrap">
-    <button class="nav-arrow" id="navPrev">&#8249;</button>
+    <button class="nav-arr" id="navPrev">&#8249;</button>
     <div class="nav-links" id="navLinks">
       <a href="#" class="active">🏠 হোম</a>
       <a href="#">ত্রিপুরা</a>
@@ -302,10 +274,8 @@ button{cursor:pointer;font-family:inherit;}
       <a href="#">রাশিফল</a>
       <a href="#">ই-পেপার</a>
     </div>
-    <button class="nav-arrow" id="navNext">&#8250;</button>
-    <button class="ham-btn" id="hamBtn" aria-label="মেনু">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="nav-arr" id="navNext">&#8250;</button>
+    <button class="ham-btn" id="hamBtn"><span></span><span></span><span></span></button>
   </div>
   <div class="mob-nav" id="mobNav">
     <a href="#">🏠 হোম</a>
@@ -320,69 +290,28 @@ button{cursor:pointer;font-family:inherit;}
   </div>
 </nav>
 
-<!-- TICKER -->
 <div class="ticker-bar">
   <div class="ticker-label">⚡ সর্বশেষ</div>
   <div class="ticker-scroll">
     <div class="ticker-track" id="tickerTrack">
-      <span>এখন ত্রিপুরায় স্বাগতম</span>
-      <span>সর্বশেষ খবরের জন্য আমাদের সাথে থাকুন</span>
-      <span>এখন ত্রিপুরায় স্বাগতম</span>
-      <span>সর্বশেষ খবরের জন্য আমাদের সাথে থাকুন</span>
+      <span>এখন ত্রিপুরায় স্বাগতম</span><span>সর্বশেষ খবরের জন্য আমাদের সাথে থাকুন</span>
+      <span>এখন ত্রিপুরায় স্বাগতম</span><span>সর্বশেষ খবরের জন্য আমাদের সাথে থাকুন</span>
     </div>
   </div>
 </div>
 
-<!-- PAGE -->
 <div class="container">
   <div class="page-grid">
     <main>
-
-      <!-- HERO -->
       <div class="hero-grid" id="heroGrid">
-        <div class="news-loading" style="grid-column:1/-1;">
-          <div style="font-size:30px;margin-bottom:10px;">⏳</div>
-          <div>নিউজ লোড হচ্ছে...</div>
-        </div>
+        <div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:#777;"><div style="font-size:30px;margin-bottom:10px;">⏳</div><div>নিউজ লোড হচ্ছে...</div></div>
       </div>
-
-      <!-- ত্রিপুরা -->
-      <div class="sec-wrap" id="sec-tripura" style="display:none;">
-        <div class="sec-head"><h2>ত্রিপুরা</h2><a href="#" class="see-all">সব দেখুন →</a></div>
-        <div class="grid-3" id="grid-tripura"></div>
-      </div>
-
-      <!-- ভারত -->
-      <div class="sec-wrap" id="sec-india" style="display:none;">
-        <div class="sec-head"><h2>ভারত</h2><a href="#" class="see-all">সব দেখুন →</a></div>
-        <div class="grid-2" id="grid-india"></div>
-      </div>
-
-      <!-- রাজনীতি -->
-      <div class="sec-wrap" id="sec-politics" style="display:none;">
-        <div class="sec-head"><h2>রাজনীতি</h2><a href="#" class="see-all">সব দেখুন →</a></div>
-        <div class="grid-3" id="grid-politics"></div>
-      </div>
-
-      <!-- খেলাধুলা -->
-      <div class="sec-wrap" id="sec-sports" style="display:none;">
-        <div class="sec-head"><h2>খেলাধুলা</h2><a href="#" class="see-all">সব দেখুন →</a></div>
-        <div class="grid-3" id="grid-sports"></div>
-      </div>
-
-      <!-- বিনোদন -->
-      <div class="sec-wrap" id="sec-entertainment" style="display:none;">
-        <div class="sec-head"><h2>বিনোদন</h2><a href="#" class="see-all">সব দেখুন →</a></div>
-        <div class="grid-3" id="grid-entertainment"></div>
-      </div>
-
-      <!-- আন্তর্জাতিক -->
-      <div class="sec-wrap" id="sec-international" style="display:none;">
-        <div class="sec-head"><h2>আন্তর্জাতিক</h2><a href="#" class="see-all">সব দেখুন →</a></div>
-        <div class="grid-3" id="grid-international"></div>
-      </div>
-
-      <!-- রাশিফল -->
+      <div class="sec-wrap" id="sec-tripura" style="display:none;"><div class="sec-head"><h2>ত্রিপুরা</h2><a href="#" class="see-all">সব দেখুন →</a></div><div class="grid-3" id="grid-tripura"></div></div>
+      <div class="sec-wrap" id="sec-india" style="display:none;"><div class="sec-head"><h2>ভারত</h2><a href="#" class="see-all">সব দেখুন →</a></div><div class="grid-2" id="grid-india"></div></div>
+      <div class="sec-wrap" id="sec-politics" style="display:none;"><div class="sec-head"><h2>রাজনীতি</h2><a href="#" class="see-all">সব দেখুন →</a></div><div class="grid-3" id="grid-politics"></div></div>
+      <div class="sec-wrap" id="sec-sports" style="display:none;"><div class="sec-head"><h2>খেলাধুলা</h2><a href="#" class="see-all">সব দেখুন →</a></div><div class="grid-3" id="grid-sports"></div></div>
+      <div class="sec-wrap" id="sec-entertainment" style="display:none;"><div class="sec-head"><h2>বিনোদন</h2><a href="#" class="see-all">সব দেখুন →</a></div><div class="grid-3" id="grid-entertainment"></div></div>
+      <div class="sec-wrap" id="sec-international" style="display:none;"><div class="sec-head"><h2>আন্তর্জাতিক</h2><a href="#" class="see-all">সব দেখুন →</a></div><div class="grid-3" id="grid-international"></div></div>
       <div class="sec-wrap">
         <div class="sec-head"><h2>রাশিফল</h2><a href="#" class="see-all">সব দেখুন →</a></div>
         <div class="rashi-grid">
@@ -400,10 +329,8 @@ button{cursor:pointer;font-family:inherit;}
           <div class="rashi-card"><div class="ri">♓</div><div class="rn">মীন</div><div class="rd">১৯ ফেব্রুয়ারি–২০ মার্চ</div></div>
         </div>
       </div>
-
     </main>
 
-    <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="weather-box">
         <div class="wc">🌍 আগরতলা, ত্রিপুরা</div>
@@ -415,31 +342,21 @@ button{cursor:pointer;font-family:inherit;}
           <div><span>🌡️ অনুভব</span><strong>31°</strong></div>
         </div>
       </div>
-
-      <div class="widget" id="trendingWidget" style="display:none;">
-        <div class="whead">🔥 ট্রেন্ডিং</div>
-        <div class="wbody" id="trendingList"></div>
-      </div>
-
+      <div class="widget" id="trendingWidget" style="display:none;"><div class="whead">🔥 ট্রেন্ডিং</div><div class="wbody" id="trendingList"></div></div>
       <div class="ad-box">
         <p>বিজ্ঞাপনের জন্য যোগাযোগ করুন</p>
         <h3>📢 আপনার বিজ্ঞাপন দিন</h3>
         <p>ত্রিপুরার সেরা বাংলা নিউজ পোর্টালে</p>
         <a href="https://wa.me/918787391790" target="_blank" rel="noopener">💬 WhatsApp করুন</a>
       </div>
-
-      <div class="widget" id="latestWidget" style="display:none;">
-        <div class="whead">📰 সর্বশেষ খবর</div>
-        <div class="wbody" id="latestList"></div>
-      </div>
-
+      <div class="widget" id="latestWidget" style="display:none;"><div class="whead">📰 সর্বশেষ খবর</div><div class="wbody" id="latestList"></div></div>
       <div class="widget">
         <div class="whead">📲 আমাদের অনুসরণ করুন</div>
         <div class="wbody">
           <div class="follow-links">
             <a href="https://facebook.com/share/1buQiZUsW5/" class="fl-fb" target="_blank" rel="noopener"><span style="font-weight:900;font-size:16px;">f</span> Facebook-এ Like করুন</a>
-            <a href="https://wa.me/918787391790" class="fl-wa" target="_blank" rel="noopener"><span>💬</span> WhatsApp-এ যোগ দিন</a>
-            <a href="/cdn-cgi/l/email-protection#adc8c6c5c2c3d9dfc4ddd8dfccedcac0ccc4c183cec2c0" class="fl-em"><span>✉️</span> <span class="__cf_email__" data-cfemail="395c525156574d4b50494c4b58795e54585055175a5654">[email&#160;protected]</span></a>
+            <a href="https://wa.me/918787391790" class="fl-wa" target="_blank" rel="noopener">💬 WhatsApp-এ যোগ দিন</a>
+            <a href="mailto:ekhontripura@gmail.com" class="fl-em">✉️ ekhontripura@gmail.com</a>
           </div>
         </div>
       </div>
@@ -447,7 +364,6 @@ button{cursor:pointer;font-family:inherit;}
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-grid">
     <div class="footer-about">
@@ -456,297 +372,177 @@ button{cursor:pointer;font-family:inherit;}
       <div class="f-socials">
         <a href="https://facebook.com/share/1buQiZUsW5/" target="_blank" rel="noopener">f</a>
         <a href="https://wa.me/918787391790" target="_blank" rel="noopener">W</a>
-        <a href="/cdn-cgi/l/email-protection#67020c0f080913150e1712150627000a060e0b4904080a">@</a>
+        <a href="mailto:ekhontripura@gmail.com">@</a>
       </div>
     </div>
-    <div class="footer-col">
-      <h4>বিভাগ</h4>
-      <ul>
-        <li><a href="#">ত্রিপুরা</a></li>
-        <li><a href="#">ভারত</a></li>
-        <li><a href="#">আন্তর্জাতিক</a></li>
-        <li><a href="#">রাজনীতি</a></li>
-        <li><a href="#">খেলাধুলা</a></li>
-        <li><a href="#">বিনোদন</a></li>
-        <li><a href="#">রাশিফল</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>দ্রুত লিঙ্ক</h4>
-      <ul>
-        <li><a href="#">আমাদের সম্পর্কে</a></li>
-        <li><a href="#">যোগাযোগ</a></li>
-        <li><a href="#">বিজ্ঞাপন</a></li>
-        <li><a href="#">ই-পেপার</a></li>
-        <li><a href="#">গোপনীয়তা নীতি</a></li>
-        <li><a href="#">দাবিত্যাগ</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>যোগাযোগ</h4>
-      <ul>
-        <li><a href="/cdn-cgi/l/email-protection#f0959b989f9e84829980858291b0979d91999cde939f9d">📧 <span class="__cf_email__" data-cfemail="aacfc1c2c5c4ded8c3dadfd8cbeacdc7cbc3c684c9c5c7">[email&#160;protected]</span></a></li>
-        <li><a href="https://wa.me/918787391790">📱 +91 87873 91790</a></li>
-        <li><a href="https://facebook.com/share/1buQiZUsW5/" target="_blank" rel="noopener">💻 Facebook Page</a></li>
-      </ul>
-    </div>
+    <div class="footer-col"><h4>বিভাগ</h4><ul><li><a href="#">ত্রিপুরা</a></li><li><a href="#">ভারত</a></li><li><a href="#">আন্তর্জাতিক</a></li><li><a href="#">রাজনীতি</a></li><li><a href="#">খেলাধুলা</a></li><li><a href="#">বিনোদন</a></li><li><a href="#">রাশিফল</a></li></ul></div>
+    <div class="footer-col"><h4>দ্রুত লিঙ্ক</h4><ul><li><a href="#">আমাদের সম্পর্কে</a></li><li><a href="#">যোগাযোগ</a></li><li><a href="#">বিজ্ঞাপন</a></li><li><a href="#">ই-পেপার</a></li><li><a href="#">গোপনীয়তা নীতি</a></li></ul></div>
+    <div class="footer-col"><h4>যোগাযোগ</h4><ul><li><a href="mailto:ekhontripura@gmail.com">📧 ekhontripura@gmail.com</a></li><li><a href="https://wa.me/918787391790">📱 +91 87873 91790</a></li><li><a href="https://facebook.com/share/1buQiZUsW5/" target="_blank" rel="noopener">💻 Facebook Page</a></li></ul></div>
   </div>
-  <div class="footer-bottom">
-    © ২০২৬ <span>এখন ত্রিপুরা ডিজিটাল মিডিয়া</span>। সর্বস্বত্ব সংরক্ষিত।
-  </div>
+  <div class="footer-bottom">© ২০২৬ <span>এখন ত্রিপুরা ডিজিটাল মিডিয়া</span>। সর্বস্বত্ব সংরক্ষিত।</div>
 </footer>
 
-<!-- NEWS MODAL -->
-<div id="newsModal" onclick="if(event.target===this)window.closeNewsModal();">
+<!-- MODAL -->
+<div id="newsModal" onclick="if(event.target.id==='newsModal')NM.close();">
   <div class="modal-box">
-    <button class="modal-close-btn" onclick="window.closeNewsModal()">✕ বন্ধ করুন</button>
+    <button class="mcbtn" onclick="NM.close()">✕ বন্ধ করুন</button>
     <img id="modalImg" src="" alt="">
-    <div class="modal-body">
-      <span class="modal-cat" id="modalCat"></span>
-      <h2 class="modal-title" id="modalTitle"></h2>
-      <div class="modal-meta">
-        <span id="modalAuthor"></span>
-        <span id="modalDate"></span>
-      </div>
-      <div class="modal-content" id="modalContent"></div>
+    <div class="mbody">
+      <span class="mcat" id="modalCat"></span>
+      <h2 class="mtitle" id="modalTitle"></h2>
+      <div class="mmeta"><span id="modalAuthor"></span><span id="modalDate"></span></div>
+      <div class="mcontent" id="modalContent"></div>
     </div>
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// ── Bengali date ──
-var DAYS=['রবিবার','সোমবার','মঙ্গলবার','বুধবার','বৃহস্পতিবার','শুক্রবার','শনিবার'];
-var MONTHS=['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
-function toBn(n){return String(n).replace(/\d/g,function(d){return '০১২৩৪৫৬৭৮৯'[d];});}
+<script>
+// Bengali date
+var D=["রবিবার","সোমবার","মঙ্গলবার","বুধবার","বৃহস্পতিবার","শুক্রবার","শনিবার"];
+var M=["জানুয়ারি","ফেব্রুয়ারি","মার্চ","এপ্রিল","মে","জুন","জুলাই","আগস্ট","সেপ্টেম্বর","অক্টোবর","নভেম্বর","ডিসেম্বর"];
+function bn(n){return String(n).replace(/\d/g,function(d){return "০১২৩৪৫৬৭৮৯"[d];});}
 var now=new Date();
-var el=document.getElementById('topDate');
-if(el) el.textContent=DAYS[now.getDay()]+', '+toBn(now.getDate())+' '+MONTHS[now.getMonth()]+' '+toBn(now.getFullYear());
+var td=document.getElementById("topDate");
+if(td) td.textContent=D[now.getDay()]+", "+bn(now.getDate())+" "+M[now.getMonth()]+" "+bn(now.getFullYear());
 
-// ── Hamburger ──
-var hamBtn=document.getElementById('hamBtn');
-var mobNav=document.getElementById('mobNav');
-if(hamBtn&&mobNav){
-  hamBtn.addEventListener('click',function(){
-    this.classList.toggle('open');
-    mobNav.classList.toggle('open');
-  });
-  mobNav.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click',function(){
-      hamBtn.classList.remove('open');
-      mobNav.classList.remove('open');
-    });
-  });
-  document.addEventListener('click',function(e){
-    if(!hamBtn.contains(e.target)&&!mobNav.contains(e.target)){
-      hamBtn.classList.remove('open');
-      mobNav.classList.remove('open');
-    }
-  });
+// Hamburger
+var hb=document.getElementById("hamBtn"),mn=document.getElementById("mobNav");
+if(hb&&mn){
+  hb.addEventListener("click",function(){this.classList.toggle("open");mn.classList.toggle("open");});
+  mn.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){hb.classList.remove("open");mn.classList.remove("open");});});
+  document.addEventListener("click",function(e){if(!hb.contains(e.target)&&!mn.contains(e.target)){hb.classList.remove("open");mn.classList.remove("open");}});
 }
 
-// ── Nav drag scroll ──
-var navLinks=document.getElementById('navLinks');
-var navPrev=document.getElementById('navPrev');
-var navNext=document.getElementById('navNext');
-if(navLinks){
-  var isDrag=false,startX=0,scrollLeft=0;
-  navLinks.addEventListener('mousedown',function(e){isDrag=true;startX=e.pageX-navLinks.offsetLeft;scrollLeft=navLinks.scrollLeft;navLinks.style.cursor='grabbing';});
-  document.addEventListener('mouseup',function(){isDrag=false;navLinks.style.cursor='grab';});
-  document.addEventListener('mousemove',function(e){if(!isDrag)return;e.preventDefault();var x=e.pageX-navLinks.offsetLeft;navLinks.scrollLeft=scrollLeft-(x-startX)*1.5;});
-  if(navPrev) navPrev.addEventListener('click',function(){navLinks.scrollBy({left:-160,behavior:'smooth'});});
-  if(navNext) navNext.addEventListener('click',function(){navLinks.scrollBy({left:160,behavior:'smooth'});});
+// Nav drag scroll
+var nl=document.getElementById("navLinks");
+var np=document.getElementById("navPrev"),nn=document.getElementById("navNext");
+if(nl){
+  var drag=false,sx=0,sl=0;
+  nl.addEventListener("mousedown",function(e){drag=true;sx=e.pageX-nl.offsetLeft;sl=nl.scrollLeft;nl.classList.add("grabbing");});
+  document.addEventListener("mouseup",function(){drag=false;nl.classList.remove("grabbing");});
+  document.addEventListener("mousemove",function(e){if(!drag)return;e.preventDefault();nl.scrollLeft=sl-(e.pageX-nl.offsetLeft-sx)*1.5;});
+  if(np) np.addEventListener("click",function(){nl.scrollBy({left:-160,behavior:"smooth"});});
+  if(nn) nn.addEventListener("click",function(){nl.scrollBy({left:160,behavior:"smooth"});});
 }
 
-// ── Nav active ──
-document.querySelectorAll('.nav-links a').forEach(function(a){
-  a.addEventListener('click',function(e){
-    e.preventDefault();
-    document.querySelectorAll('.nav-links a').forEach(function(x){x.classList.remove('active');});
-    this.classList.add('active');
-  });
+// Nav active
+document.querySelectorAll(".nav-links a").forEach(function(a){
+  a.addEventListener("click",function(e){e.preventDefault();document.querySelectorAll(".nav-links a").forEach(function(x){x.classList.remove("active");});this.classList.add("active");});
 });
 
-// ── NEWS MODAL ──
-window._newsData = {};
-
-window.openNewsModal = function(key) {
-  var data = window._newsData[key];
-  if(!data){ console.log('No data for key:', key); return; }
-  var catNames = {tripura:'ত্রিপুরা',india:'ভারত',international:'আন্তর্জাতিক',politics:'রাজনীতি',sports:'খেলাধুলা',entertainment:'বিনোদন',rashi:'রাশিফল'};
-  document.getElementById('modalCat').textContent = catNames[data.category] || data.category || '';
-  document.getElementById('modalTitle').textContent = data.title || '';
-  document.getElementById('modalContent').textContent = data.content || '';
-  document.getElementById('modalAuthor').textContent = data.author ? '✍ '+data.author : '';
-  document.getElementById('modalDate').textContent = data.date ? '📅 '+data.date : '';
-  var img = document.getElementById('modalImg');
-  if(data.imageUrl){ img.src=data.imageUrl; img.style.display='block'; }
-  else { img.style.display='none'; img.src=''; }
-  var modal = document.getElementById('newsModal');
-  modal.scrollTop = 0;
-  modal.style.display = 'block';
-}
-
-window.closeNewsModal = function() {
-  document.getElementById('newsModal').style.display = 'none';
-}
-
-document.addEventListener('keydown',function(e){
-  if(e.key==='Escape') window.closeNewsModal();
+// Rashi
+document.querySelectorAll(".rashi-card").forEach(function(c){
+  c.addEventListener("click",function(){document.querySelectorAll(".rashi-card").forEach(function(x){x.style.borderTopColor="";});this.style.borderTopColor="#c0392b";});
 });
+
+// NEWS MODAL
+window.NM = {
+  _data: {},
+  open: function(key) {
+    var d = this._data[key];
+    if(!d) return;
+    var cn={tripura:"ত্রিপুরা",india:"ভারত",international:"আন্তর্জাতিক",politics:"রাজনীতি",sports:"খেলাধুলা",entertainment:"বিনোদন",rashi:"রাশিফল"};
+    document.getElementById("modalCat").textContent = cn[d.category]||d.category||"";
+    document.getElementById("modalTitle").textContent = d.title||"";
+    document.getElementById("modalContent").textContent = d.content||"";
+    document.getElementById("modalAuthor").textContent = d.author?"✍ "+d.author:"";
+    document.getElementById("modalDate").textContent = d.date?"📅 "+d.date:"";
+    var img=document.getElementById("modalImg");
+    if(d.imageUrl){img.src=d.imageUrl;img.style.display="block";}
+    else{img.style.display="none";img.src="";}
+    var m=document.getElementById("newsModal");
+    m.scrollTop=0;
+    m.style.display="block";
+  },
+  close: function() {
+    document.getElementById("newsModal").style.display="none";
+  },
+  store: function(key, data) {
+    this._data[key] = data;
+  }
+};
+document.addEventListener("keydown",function(e){if(e.key==="Escape")NM.close();});
 </script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, query, where, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDilxe-j7wzHGOGhwro3ugOo94r_iIXvPI",
-  authDomain: "ekhon-tripura-c809b.firebaseapp.com",
-  projectId: "ekhon-tripura-c809b",
-  storageBucket: "ekhon-tripura-c809b.firebasestorage.app",
-  messagingSenderId: "735998815074",
-  appId: "1:735998815074:web:75c592d729e2bc30c05a3b"
-};
-
-const app = initializeApp(firebaseConfig);
+const app = initializeApp({
+  apiKey:"AIzaSyDilxe-j7wzHGOGhwro3ugOo94r_iIXvPI",
+  authDomain:"ekhon-tripura-c809b.firebaseapp.com",
+  projectId:"ekhon-tripura-c809b",
+  storageBucket:"ekhon-tripura-c809b.firebasestorage.app",
+  messagingSenderId:"735998815074",
+  appId:"1:735998815074:web:75c592d729e2bc30c05a3b"
+});
 const db = getFirestore(app);
+const CN = {tripura:"ত্রিপুরা",india:"ভারত",international:"আন্তর্জাতিক",politics:"রাজনীতি",sports:"খেলাধুলা",entertainment:"বিনোদন",rashi:"রাশিফল"};
 
-const catNames = {tripura:'ত্রিপুরা',india:'ভারত',international:'আন্তর্জাতিক',politics:'রাজনীতি',sports:'খেলাধুলা',entertainment:'বিনোদন',rashi:'রাশিফল'};
+function fmt(ts){return ts?new Date(ts.seconds*1000).toLocaleDateString("bn-BD"):"";}
 
-function timeAgo(ts) {
-  if(!ts) return '';
-  return new Date(ts.seconds*1000).toLocaleDateString('bn-BD');
+function card(d, key, horiz) {
+  NM.store(key, {...d, date:fmt(d.createdAt)});
+  const cat = CN[d.category]||d.category||"";
+  const img = d.imageUrl?`<img src="${d.imageUrl}" style="width:100%;height:100%;object-fit:cover;" loading="lazy">`:`<div class="ph ph-1" style="height:100%;">📰</div>`;
+  if(horiz) return `<div class="card card-h" onclick="NM.open('${key}')"><div class="cimg" style="min-height:120px;">${img}</div><div class="card-body"><span class="badge b-red">${cat}</span><h3>${d.title}</h3><div class="cmeta"><span>📅 ${fmt(d.createdAt)}</span></div></div></div>`;
+  return `<div class="card" onclick="NM.open('${key}')"><div class="cimg">${img}</div><div class="card-body"><span class="badge b-red">${cat}</span><h3>${d.title}</h3><p>${d.excerpt||""}</p><div class="cmeta"><span>📅 ${fmt(d.createdAt)}</span>${d.author?`<span>✍ ${d.author}</span>`:""}</div></div></div>`;
 }
 
-function storeAndGetKey(data, prefix, idx) {
-  const key = prefix + '_' + idx;
-  window._newsData[key] = data;
-  return key;
-}
-
-function makeCard(data, key, isHoriz) {
-  const cat = catNames[data.category] || data.category || '';
-  const imgHtml = data.imageUrl
-    ? `<img src="${data.imageUrl}" style="width:100%;height:100%;object-fit:cover;" loading="lazy">`
-    : `<div class="ph ph-1" style="height:100%;">📰</div>`;
-  if(isHoriz) {
-    return `<div class="card card-h" onclick="window.openNewsModal('${key}')">
-      <div class="cimg">${imgHtml}</div>
-      <div class="card-body">
-        <span class="badge b-red">${cat}</span>
-        <h3>${data.title}</h3>
-        <div class="cmeta"><span>📅 ${timeAgo(data.createdAt)}</span></div>
-      </div>
-    </div>`;
-  }
-  return `<div class="card" onclick="window.openNewsModal('${key}')">
-    <div class="cimg" style="height:175px;">${imgHtml}</div>
-    <div class="card-body">
-      <span class="badge b-red">${cat}</span>
-      <h3>${data.title}</h3>
-      <p>${data.excerpt||''}</p>
-      <div class="cmeta"><span>📅 ${timeAgo(data.createdAt)}</span>${data.author?`<span>✍ ${data.author}</span>`:''}</div>
-    </div>
-  </div>`;
-}
-
-function makeHero(data, key, isMain) {
-  const cat = catNames[data.category] || data.category || '';
-  const bgStyle = data.imageUrl ? `style="background:url('${data.imageUrl}') center/cover no-repeat;"` : '';
-  if(isMain) {
-    return `<div class="hero-main" ${bgStyle} onclick="window.openNewsModal('${key}')">
-      ${!data.imageUrl ? '<div class="himg"><div class="ph ph-1">📰</div></div>' : ''}
-      <div class="hero-cap">
-        ${data.breaking ? '<span class="badge b-break">🔴 ব্রেকিং</span><br>' : ''}
-        <span class="badge b-red">${cat}</span>
-        <h2>${data.title}</h2>
-        <div class="meta">✍ ${data.author||'প্রতিবেদক'} &nbsp;|&nbsp; ${timeAgo(data.createdAt)}</div>
-      </div>
-    </div>`;
-  }
-  return `<div class="hero-side" ${bgStyle} onclick="window.openNewsModal('${key}')">
-    ${!data.imageUrl ? '<div class="himg"><div class="ph ph-2">📰</div></div>' : ''}
-    <div class="hs-cap">
-      <span class="badge b-red">${cat}</span>
-      <h3>${data.title}</h3>
-    </div>
-  </div>`;
-}
-
-async function loadAll() {
-  try {
-    const q = query(collection(db,'news'), where('status','==','published'), orderBy('createdAt','desc'), limit(30));
-    const snap = await getDocs(q);
-    if(snap.empty) {
-      document.getElementById('heroGrid').innerHTML = '<div class="news-loading">এখনো কোনো নিউজ প্রকাশিত হয়নি।</div>';
-      return;
-    }
-
-    const docs = [];
-    snap.forEach(d => docs.push({id:d.id, data:d.data()}));
-
-    // Store all news data
-    docs.forEach((d,i) => { window._newsData['news_'+i] = {...d.data, createdAt:d.data.createdAt}; });
+(async()=>{
+  try{
+    const snap = await getDocs(query(collection(db,"news"),where("status","==","published"),orderBy("createdAt","desc"),limit(30)));
+    if(snap.empty){document.getElementById("heroGrid").innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:#777;">এখনো কোনো নিউজ নেই।</div>';return;}
+    const docs=[];snap.forEach(d=>docs.push({id:d.id,...d.data()}));
 
     // HERO
-    const heroGrid = document.getElementById('heroGrid');
-    let heroHtml = '';
-    if(docs[0]) heroHtml += makeHero(docs[0].data, 'news_0', true);
-    if(docs[1]) heroHtml += makeHero(docs[1].data, 'news_1', false);
-    if(docs[2]) heroHtml += makeHero(docs[2].data, 'news_2', false);
-    heroGrid.innerHTML = heroHtml || '<div class="news-loading">নিউজ লোড হচ্ছে...</div>';
+    const hg=document.getElementById("heroGrid");
+    let hh="";
+    function hero(d,key,main){
+      NM.store(key,{...d,date:fmt(d.createdAt)});
+      const cat=CN[d.category]||d.category||"";
+      const bg=d.imageUrl?`style="background:url('${d.imageUrl}') center/cover no-repeat;"`:"`";
+      const pi=d.imageUrl?"":'<div class="himg"><div class="ph ph-1">📰</div></div>';
+      if(main) return `<div class="hero-main" ${bg} onclick="NM.open('${key}')">${pi}<div class="hero-cap">${d.breaking?'<span class="badge b-break">🔴 ব্রেকিং</span><br>':""}  <span class="badge b-red">${cat}</span><h2>${d.title}</h2><div class="meta">✍ ${d.author||"প্রতিবেদক"} | ${fmt(d.createdAt)}</div></div></div>`;
+      return `<div class="hero-side" ${bg} onclick="NM.open('${key}')">${pi}<div class="hs-cap"><span class="badge b-red">${cat}</span><h3>${d.title}</h3></div></div>`;
+    }
+    if(docs[0]) hh+=hero(docs[0],"h0",true);
+    if(docs[1]) hh+=hero(docs[1],"h1",false);
+    if(docs[2]) hh+=hero(docs[2],"h2",false);
+    if(hh) hg.innerHTML=hh;
 
     // TICKER
-    const ticker = document.getElementById('tickerTrack');
-    if(ticker) {
-      const items = docs.slice(0,7).map(d=>`<span>${d.data.title}</span>`).join('');
-      ticker.innerHTML = items + items;
-    }
+    const tk=document.getElementById("tickerTrack");
+    if(tk){const t=docs.slice(0,7).map(d=>`<span>${d.title}</span>`).join("");tk.innerHTML=t+t;}
 
-    // CATEGORY GRIDS
-    const cats = ['tripura','india','politics','sports','entertainment','international'];
-    cats.forEach(cat => {
-      const catDocs = docs.filter(d => d.data.category === cat);
-      if(!catDocs.length) return;
-      const sec = document.getElementById('sec-'+cat);
-      const grid = document.getElementById('grid-'+cat);
-      if(!sec || !grid) return;
-      sec.style.display = 'block';
-      const isHoriz = cat === 'india';
-      const count = isHoriz ? 4 : 3;
-      grid.innerHTML = catDocs.slice(0,count).map((d,i) => {
-        const key = `cat_${cat}_${i}`;
-        window._newsData[key] = d.data;
-        return makeCard(d.data, key, isHoriz);
-      }).join('');
+    // CATEGORIES
+    ["tripura","india","politics","sports","entertainment","international"].forEach(cat=>{
+      const cd=docs.filter(d=>d.category===cat);
+      if(!cd.length)return;
+      const sec=document.getElementById("sec-"+cat);
+      const grid=document.getElementById("grid-"+cat);
+      if(sec) sec.style.display="block";
+      if(!grid)return;
+      const h=cat==="india";
+      grid.innerHTML=cd.slice(0,h?4:3).map((d,i)=>card(d,`c_${cat}_${i}`,h)).join("");
     });
 
-    // TRENDING SIDEBAR
-    const trendingList = document.getElementById('trendingList');
-    const trendingWidget = document.getElementById('trendingWidget');
-    if(trendingList && docs.length) {
-      const bnNums = ['১','২','৩','৪','৫'];
-      trendingList.innerHTML = docs.slice(0,5).map((d,i) => {
-        const key = `trend_${i}`;
-        window._newsData[key] = d.data;
-        return `<div class="trend-item" onclick="window.openNewsModal('${key}')">
-          <div class="tnum">${bnNums[i]||i+1}</div>
-          <div><h5>${d.data.title}</h5><div class="tm">📅 ${timeAgo(d.data.createdAt)}</div></div>
-        </div>`;
-      }).join('');
-      trendingWidget.style.display = 'block';
+    // TRENDING
+    const tl=document.getElementById("trendingList"),tw=document.getElementById("trendingWidget");
+    if(tl){
+      const bn=["১","২","৩","৪","৫"];
+      tl.innerHTML=docs.slice(0,5).map((d,i)=>{NM.store(`t${i}`,{...d,date:fmt(d.createdAt)});return `<div class="trend-item" onclick="NM.open('t${i}')"><div class="tnum">${bn[i]}</div><div><h5>${d.title}</h5><div class="tm">📅 ${fmt(d.createdAt)}</div></div></div>`;}).join("");
+      if(tw)tw.style.display="block";
     }
 
-    // LATEST SIDEBAR
-    const latestList = document.getElementById('latestList');
-    const latestWidget = document.getElementById('latestWidget');
-    if(latestList && docs.length) {
-      latestList.innerHTML = docs.slice(0,4).map((d,i) => {
-        const key = `latest_${i}`;
-        window._newsData[key] = d.data;
-        const img = d.data.imageUrl
-          ? `<img src="${d.data.imageUrl}" style="width:100%;height:100%;object-fit:cover;">`
-          : `<div class="ph ph-1" style="height:54px;font-size:18px;">📰</div>`;
-        return `<div class="sw-item" onclick="window.openNewsModal('${key}')">
-          <div class="sth">${img}</div>
-          <di
+    // LATEST
+    const ll=document.getElementById("latestList"),lw=document.getElementById("latestWidget");
+    if(ll){
+      ll.innerHTML=docs.slice(0,4).map((d,i)=>{NM.store(`l${i}`,{...d,date:fmt(d.createdAt)});const img=d.imageUrl?`<img src="${d.imageUrl}" style="width:100%;height:100%;object-fit:cover;">`:`<div class="ph ph-1" style="height:54px;font-size:18px;">📰</div>`;return `<div class="sw-item" onclick="NM.open('l${i}')"><div class="sth">${img}</div><div><h5>${d.title}</h5><div class="sm">📅 ${fmt(d.createdAt)}</div></div></div>`;}).join("");
+      if(lw)lw.style.display="block";
+    }
+  }catch(e){console.error(e);}
+})();
+</script>
+</body>
+</html>
